@@ -59,9 +59,8 @@ if($_SESSION['id']!=null) {
   </head>
 
   <body>
-    <center>
-    <img src="https://log.op.gg/wp-content/uploads/1999/01/logo_opgg_blue_18x3.png" alt="logo" style="width:360px;height:60px;">
-  </center>
+
+    <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
     <div>
       <div class="split left">
         <ul>
