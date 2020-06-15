@@ -5,7 +5,7 @@ if($_SESSION['id']!=null) {
 
 <body>
     <center>
-      <img src="https://log.op.gg/wp-content/uploads/1999/01/logo_opgg_blue_18x3.png" alt="logo" style="width:720px;height:120px;"><br><br><br><br>
+      <span style="font-size:100px; color:#bd1c11; font-family:Lucida Console; font-weight:bold;">SEJONG.GG</span><br><br><br><br>
       <p>  <? echo $_SESSION['id'] ?>님 안녕하세요!
       <input type = "button" value ="로그아웃" onClick= "location.href ='logout.php'">
       </p>
