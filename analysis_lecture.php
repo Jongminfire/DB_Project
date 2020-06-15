@@ -59,6 +59,10 @@
     <div>
         <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span><button onclick="">과목 담기</button></div>
         <br><br><br><br>
+=======
+    <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span><button onclick="">과목 담기</button></div>
+    <br><br><br><br>
+>>>>>>> 2c61e0f1c3d9af3b6c0afac7c79cb417444a40c9
     <label style="font-size:20px;"><? echo "&nbsp;&nbsp;&nbsp;&nbsp;<","$dept_name","  ","$sub_grade","학년>";?></label>
     <br><br>
     <div style = "border: solid 1px; width: 33%; padding: 20px;">
