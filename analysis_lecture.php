@@ -54,6 +54,7 @@
 
     <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
     <br><br>
+<<<<<<< HEAD
 
     <div>
         <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span><button onclick="">과목 담기</button></div>
