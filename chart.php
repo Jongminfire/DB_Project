@@ -63,7 +63,7 @@ if($_SESSION['id']!=null) {
                   <td>강의실</td>
                   <td>강의시간</td>
                   <td>분반</td>
-                  <td>경쟁률</td>
+                  <td>경쟁률 <button onclick="rating()"><span id="rating">오름차순</span></button></td>
                 </tr>
                 <?
                   include './dbconn.php'; //dpconn 내용 중복되지 않게
@@ -206,6 +206,18 @@ if($_SESSION['id']!=null) {
           a.style.display="none";
           b.style.display="none";
           c.style.display="block";
+        }
+      }
+      function rating() 
+      {
+        var x = document.getElementById("rating");
+        if (x.innerHTML === "오름차순") 
+        {
+          x.innerHTML = "내림차순";
+        } 
+        else 
+        {
+          x.innerHTML = "오름차순";
         }
       }
     </script>
