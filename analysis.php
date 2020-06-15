@@ -23,19 +23,19 @@ if($_SESSION['id']!=null) {
         padding: 8px;
       }
 
-      ul 
+      ul
       {
-  			background-color: #AAAAFF;
-  			list-style-type: none;
-  			margin: 0;
-  			padding: 0;
-  			overflow: hidden;
+           background-color: #AAAAFF;
+           list-style-type: none;
+           margin: 0;
+           padding: 0;
+           overflow: hidden;
         width: 100%;
-		  }
-  		li
+        }
+        li
       {
-  			float: left;
-  		}
+           float: left;
+        }
       /* Create two equal columns that floats next to each other */
       .split
       {
@@ -64,9 +64,9 @@ if($_SESSION['id']!=null) {
     <div>
       <div class="split left">
         <ul>
-      		<li><button onclick="hideANDshow(1)">강의</button></li>
-      		<li><button onclick="hideANDshow(2)">교수</button></li>
-    	  </ul>
+            <li><button onclick="hideANDshow(1)">강의</button></li>
+            <li><button onclick="hideANDshow(2)">교수</button></li>
+         </ul>
         <div id="pick_sub">
           <table>
             <tr>
@@ -86,9 +86,9 @@ if($_SESSION['id']!=null) {
               {
                 echo "
                 <tr>
-                  <td><a href = 'analysis_lecture.php?id=$row[dept_name]'> $row[dept_name]</a></td>
+                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[sub_name]</a></td>
                   <td>$row[prof_name]</td>
-                  <td>$row[sub_name]</td>
+                  <td>$row[dept_name]</td>
                   <td>$row[sub_grade]</td>
                 </tr>";
               }
