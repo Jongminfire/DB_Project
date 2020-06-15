@@ -43,27 +43,24 @@
         <div style="float:left; font-size:50px;">컴퓨터그래픽스__<span style="font-size:35px;">송오영  </span><button onclick="">과목 담기</button></div>        
     </div>
     <br><br><br><br>
-    <div>
+    <div style = "border: solid 1px; width: 33%; padding: 20px;">
         <form action="/action_page.php">
-            <label for="cars">평점 남기기: </label>
-            <select id="cars" name="cars">
+            <label for="score">평점 남기기: </label>
+            <select id="score" name="sc">
                 <option value="0">0점</option>
                 <option value="1">1점</option>
                 <option value="2">2점</option>
                 <option value="3">3점</option>
                 <option value="4">4점</option>
                 <option value="5">5점</option>
-            </select>
-            <input type="submit" value="입력">
-        </form><br>
+            </select><br>
 
         <p>후기 남기기</p>
-        <form action="/action_page.php">
             <textarea name="message" rows="10" cols="30">코멘트를 남기세요.</textarea>
-            <input type="submit" value="입력">
+            <input type="submit">
         </form>
     </div>
-    <br><br><br>
+    <br><br>
     <div>
         <div class="split left">
             <ul>
@@ -87,6 +84,6 @@
             </div>
         </div>
     </div>
-    
+
   </body>
 </html>
