@@ -1,5 +1,6 @@
 <?php
-session_start();
+include './user_check.php';
+
 if($_SESSION['id']!=null) {
 ?>
 
@@ -68,7 +69,7 @@ if($_SESSION['id']!=null) {
                 <?
                   include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-                  $query = "call competition_ASC('디지털콘텐츠학과')";
+                  $query = "call competition_ASC('$dept_name')";
                   $result = mysqli_query($conn,$query);
 
                   while($row = mysqli_fetch_array($result))
@@ -104,7 +105,7 @@ if($_SESSION['id']!=null) {
               <?
                 include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-                $query = "call competition_DESC('디지털콘텐츠학과')";
+                $query = "call competition_DESC('$dept_name')";
                 $result = mysqli_query($conn,$query);
 
                 while($row = mysqli_fetch_array($result))

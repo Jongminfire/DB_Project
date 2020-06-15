@@ -23,7 +23,7 @@ if($_SESSION['id']!=null) {
         padding: 8px;
       }
 
-      ul 
+      ul
       {
   			background-color: #AAAAFF;
   			list-style-type: none;
@@ -86,7 +86,7 @@ if($_SESSION['id']!=null) {
               {
                 echo "
                 <tr>
-                  <td><a href = 'content.php?id=$row[dept_name]'> $row[dept_name]</a></td>
+                  <td><a href = 'analysis_lecture.php'> $row[dept_name]</a></td>
                   <td>$row[prof_name]</td>
                   <td>$row[sub_name]</td>
                   <td>$row[sub_grade]</td>
