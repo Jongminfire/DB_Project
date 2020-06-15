@@ -11,7 +11,7 @@ if($_SESSION['id']!=null) {
       </p>
       <p>
         <input type = "button" value ="차트" onClick= "location.href ='chart.html'">
-      <input type = "button" value ="분석" onClick= "location.href ='analysis.html'">
+      <input type = "button" value ="분석" onClick= "location.href ='analysis.php'">
       <input type = "button" value ="마이페이지" onClick= "location.href ='mypage.html'">
       </p
     </center>

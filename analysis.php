@@ -66,17 +66,31 @@
         <div id="pick_sub">
           <table>
             <tr>
+              <th>학과</th>
+              <th>교수님 아이디</th>
               <th>강의명</th>
-              <th>평점</th>
+              <th>학년</th>
             </tr>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>1점</td>
-            </tr>
-            <tr>
-              <td>Centro comercial Moctezuma</td>
-              <td>2점</td>
-            </tr>
+
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+              $query = "Select * from subject inner join professor on professor.prof_id = subject.prof_id";
+              $result = mysqli_query($conn,$query);
+
+              while($row = mysqli_fetch_array($result))
+              {
+                echo "
+                <tr>
+                  <td><a href = 'content.php?id=$row[dept_name]'> $row[dept_name]</a></td>
+                  <td>$row[prof_name]</td>
+                  <td>$row[sub_name]</td>
+                  <td>$row[sub_grade]</td>
+                </tr>";
+              }
+              mysqli_close($conn);
+            ?>
+
           </table>
         </div>
         <div id="pick_prof" style=display:none>
@@ -85,14 +99,22 @@
               <th>교수명</th>
               <th>평점</th>
             </tr>
-            <tr>
-              <td>김교수</td>
-              <td>1점</td>
-            </tr>
-            <tr>
-              <td>이교수</td>
-              <td>2점</td>
-            </tr>
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+              $query = "Select * from professor";
+              $result = mysqli_query($conn,$query);
+
+              while($row = mysqli_fetch_array($result))
+              {
+                echo "
+                <tr>
+                  <td>$row[prof_name]</td>
+                  <td>$row[prof_id]</td>
+                </tr>";
+              }
+              mysqli_close($conn);
+            ?>
           </table>
         </div>
       </div>
