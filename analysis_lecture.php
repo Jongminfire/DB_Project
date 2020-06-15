@@ -38,151 +38,55 @@
   <body>
 
     <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
+    <br><br>
+    <div>
+        <div style="float:left; font-size:50px;">컴퓨터그래픽스__<span style="font-size:35px;">송오영  </span><button onclick="">과목 담기</button></div>        
+    </div>
+    <br><br><br><br>
+    <div>
+        <form action="/action_page.php">
+            <label for="cars">평점 남기기: </label>
+            <select id="cars" name="cars">
+                <option value="0">0점</option>
+                <option value="1">1점</option>
+                <option value="2">2점</option>
+                <option value="3">3점</option>
+                <option value="4">4점</option>
+                <option value="5">5점</option>
+            </select>
+            <input type="submit" value="입력">
+        </form><br>
 
+        <p>후기 남기기</p>
+        <form action="/action_page.php">
+            <textarea name="message" rows="10" cols="30">코멘트를 남기세요.</textarea>
+            <input type="submit" value="입력">
+        </form>
+    </div>
+    <br><br><br>
     <div>
         <div class="split left">
             <ul>
-                <li><button onclick="hideANDshow(1)">강의</button></li>
-                <li><button onclick="hideANDshow(2)">교수</button></li>
-                <li><button onclick="hideANDshow(3)">가</button></li>
-                <li><button onclick="hideANDshow(4)">나</button></li>
-                <li><button onclick="hideANDshow(5)">다</button></li>  
+                <li style="font-size:25px;">강의 후기</li> 
             </ul>
-        <div id="pick_sub">
-            <table>
-                <tr>
-                    <th>강의명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>Centro comercial Moctezuma</td>
-                    <td>2점</td>
-                </tr>
-            </table>
+            <div id="pick_sub">
+                <table>
+                    <tr>
+                        <td>별로에요</td>
+                        <td>0점</td>
+                    </tr>
+                    <tr>
+                        <td>좋아요</td>
+                        <td>4점</td>
+                    </tr>
+                    <tr>
+                        <td>그냥 그래요</td>
+                        <td>2점</td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div id="pick_prof" style=display:none>
-            <table>
-                <tr>
-                    <th>교수명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>김교수</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>이교수</td>
-                    <td>2점</td>
-                </tr>
-            </table>
-        </div>
-        <div id="pick_temp1" style=display:none>
-            <table>
-                <tr>
-                    <th>교ㄴ수명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>김ㄴ교수</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>이ㄴ교수</td>
-                    <td>2점</td>
-                </tr>
-            </table>
-        </div>
-        <div id="pick_temp2" style=display:none>
-            <table>
-                <tr>
-                    <th>교ㅋ수명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>김ㅋ교수</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>이ㅋ교수</td>
-                    <td>2점</td>
-                </tr>
-            </table>
-        </div>
-        <div id="pick_temp3" style=display:none>
-            <table>
-                <tr>
-                    <th>교ㅁ수명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>김ㅁ교수</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>이ㅁ교수</td>
-                    <td>2점</td>
-                </tr>
-            </table>
-        </div>
-
     </div>
-
-    <script type="text/javascript">
-      function hideANDshow(mode)
-      {
-        var x = document.getElementById("pick_sub");
-        var y = document.getElementById("pick_prof");
-        var a = document.getElementById("pick_temp1");
-        var b = document.getElementById("pick_temp2");
-        var c = document.getElementById("pick_temp3");
-
-
-        if(mode === 1)
-        {
-          x.style.display="block";
-          y.style.display="none";
-          a.style.display="none";
-          b.style.display="none";
-          c.style.display="none";
-
-        }
-        else if(mode === 2)
-        {
-          x.style.display="none";
-          y.style.display="block";
-          a.style.display="none";
-          b.style.display="none";
-          c.style.display="none";
-        }
-        else if(mode === 3)
-        {
-          x.style.display="none";
-          y.style.display="none";
-          a.style.display="block";
-          b.style.display="none";
-          c.style.display="none";
-        }
-        else if(mode === 4)
-        {
-          x.style.display="none";
-          y.style.display="none";
-          a.style.display="none";
-          b.style.display="block";
-          c.style.display="none";
-        }
-        else if(mode === 5)
-        {
-          x.style.display="none";
-          y.style.display="none";
-          a.style.display="none";
-          b.style.display="none";
-          c.style.display="block";
-        }
-      }
-    </script>
+    
   </body>
 </html>
