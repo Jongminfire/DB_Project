@@ -55,11 +55,10 @@
 
     <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
     <br><br>
-    <div>
-        <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span><button onclick="">과목 담기</button></div>
-        <p> <? echo "$dept_name","  ","$sub_grade","학년";?></p>
-    </div>
+    <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span><button onclick="">과목 담기</button></div>
     <br><br><br><br>
+    <label style="font-size:20px;"><? echo "&nbsp;&nbsp;&nbsp;&nbsp;<","$dept_name","  ","$sub_grade","학년>";?></label>
+    <br><br>
     <div style = "border: solid 1px; width: 33%; padding: 20px;">
         <form action="/action_page.php">
             <label for="score">평점 남기기: </label>
