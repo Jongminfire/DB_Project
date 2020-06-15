@@ -23,7 +23,7 @@ if($_SESSION['id']!=null) {
         padding: 8px;
       }
 
-      ul
+      ul 
       {
   			background-color: #AAAAFF;
   			list-style-type: none;
