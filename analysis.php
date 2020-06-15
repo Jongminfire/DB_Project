@@ -86,9 +86,9 @@ if($_SESSION['id']!=null) {
               {
                 echo "
                 <tr>
-                  <td><a href = 'analysis_lecture.php'> $row[dept_name]</a></td>
+                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[sub_name]</a></td>
                   <td>$row[prof_name]</td>
-                  <td>$row[sub_name]</td>
+                  <td>$row[dept_name]</td>
                   <td>$row[sub_grade]</td>
                 </tr>";
               }
