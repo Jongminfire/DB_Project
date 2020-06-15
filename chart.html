@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>분석페이지</title>
+    <style>
+
+        table
+        {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th
+        {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        ul
+        {
+            background-color: #AAAAFF;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+        li
+        {
+            float: left;
+        }
+    </style>
+  </head>
+
+  <body>
+
+    <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
+
+    <div>
+        <div class="split left">
+            <ul>
+                <li><button onclick="hideANDshow(1)">강의</button></li>
+                <li><button onclick="hideANDshow(2)">교수</button></li>
+                <li><button onclick="hideANDshow(3)">가</button></li>
+                <li><button onclick="hideANDshow(4)">나</button></li>
+                <li><button onclick="hideANDshow(5)">다</button></li>  
+            </ul>
+        <div id="pick_sub">
+            <table>
+                <tr>
+                    <th>강의명</th>
+                    <th>평점</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>1점</td>
+                </tr>
+                <tr>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>2점</td>
+                </tr>
+            </table>
+        </div>
+        <div id="pick_prof" style=display:none>
+            <table>
+                <tr>
+                    <th>교수명</th>
+                    <th>평점</th>
+                </tr>
+                <tr>
+                    <td>김교수</td>
+                    <td>1점</td>
+                </tr>
+                <tr>
+                    <td>이교수</td>
+                    <td>2점</td>
+                </tr>
+            </table>
+        </div>
+        <div id="pick_temp1" style=display:none>
+            <table>
+                <tr>
+                    <th>교ㄴ수명</th>
+                    <th>평점</th>
+                </tr>
+                <tr>
+                    <td>김ㄴ교수</td>
+                    <td>1점</td>
+                </tr>
+                <tr>
+                    <td>이ㄴ교수</td>
+                    <td>2점</td>
+                </tr>
+            </table>
+        </div>
+        <div id="pick_temp2" style=display:none>
+            <table>
+                <tr>
+                    <th>교ㅋ수명</th>
+                    <th>평점</th>
+                </tr>
+                <tr>
+                    <td>김ㅋ교수</td>
+                    <td>1점</td>
+                </tr>
+                <tr>
+                    <td>이ㅋ교수</td>
+                    <td>2점</td>
+                </tr>
+            </table>
+        </div>
+        <div id="pick_temp3" style=display:none>
+            <table>
+                <tr>
+                    <th>교ㅁ수명</th>
+                    <th>평점</th>
+                </tr>
+                <tr>
+                    <td>김ㅁ교수</td>
+                    <td>1점</td>
+                </tr>
+                <tr>
+                    <td>이ㅁ교수</td>
+                    <td>2점</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+      function hideANDshow(mode)
+      {
+        var x = document.getElementById("pick_sub");
+        var y = document.getElementById("pick_prof");
+        var a = document.getElementById("pick_temp1");
+        var b = document.getElementById("pick_temp2");
+        var c = document.getElementById("pick_temp3");
+
+
+        if(mode === 1)
+        {
+          x.style.display="block";
+          y.style.display="none";
+          a.style.display="none";
+          b.style.display="none";
+          c.style.display="none";
+
+        }
+        else if(mode === 2)
+        {
+          x.style.display="none";
+          y.style.display="block";
+          a.style.display="none";
+          b.style.display="none";
+          c.style.display="none";
+        }
+        else if(mode === 3)
+        {
+          x.style.display="none";
+          y.style.display="none";
+          a.style.display="block";
+          b.style.display="none";
+          c.style.display="none";
+        }
+        else if(mode === 4)
+        {
+          x.style.display="none";
+          y.style.display="none";
+          a.style.display="none";
+          b.style.display="block";
+          c.style.display="none";
+        }
+        else if(mode === 5)
+        {
+          x.style.display="none";
+          y.style.display="none";
+          a.style.display="none";
+          b.style.display="none";
+          c.style.display="block";
+        }
+      }
+    </script>
+  </body>
+</html>
