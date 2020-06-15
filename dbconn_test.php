@@ -2,7 +2,7 @@
      $host_name = "localhost";
      $db_user_id = "root";
      $db_pwd = "root";
-     $db_name = "php_test";
+     $db_name = "test";
      $conn = mysqli_connect($host_name, $db_user_id, $db_pwd, $db_name);
 
      /* check connection */

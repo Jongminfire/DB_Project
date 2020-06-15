@@ -55,8 +55,7 @@
 
   <body>
 
-    <h2>세종GG</h2>
-
+    <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
     <div>
       <div class="split left">
         <ul>

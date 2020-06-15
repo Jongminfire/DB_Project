@@ -1,0 +1,19 @@
+<?
+    include './dbconn.php';
+    echo "<center><H1>DB is connected. </H1></center><br>";
+
+    $sql = "select * from city where countrycode='KOR'";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        	$field_cnt = mysqli_num_fields($result);
+        	printf("Result set has %d fields.<br>", $field_cnt);
+
+        	$row_cnt = mysqli_num_rows($result);
+        	printf("Result set has %d rows.<br>", $row_cnt);
+
+        	/* close result set */
+        	mysqli_free_result($result);
+    }
+    /* close connection */
+    mysqli_close($conn);
+?>
