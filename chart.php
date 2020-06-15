@@ -89,6 +89,42 @@ if($_SESSION['id']!=null) {
                 ?>
             </table>
         </div>
+        <div id="pick_sub2" style=display:none>
+          <table>
+              <tr>
+                <td>교과목명</td>
+                <td>학년</td>
+                <td>학과</td>
+                <td>담당교수</td>
+                <td>강의실</td>
+                <td>강의시간</td>
+                <td>분반</td>
+                <td>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></td>
+              </tr>
+              <?
+                include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+                $query = "call competition_DESC('디지털콘텐츠학과')";
+                $result = mysqli_query($conn,$query);
+
+                while($row = mysqli_fetch_array($result))
+                {
+                  echo "
+                  <tr>
+                    <td>$row[교과목명]</td>
+                    <td>$row[학년]</td>
+                    <td>$row[학과]</td>
+                    <td>$row[담당교수]</td>
+                    <td>$row[강의실]</td>
+                    <td>$row[강의시간]</td>
+                    <td>$row[분반]</td>
+                    <td>$row[경쟁률]</td>
+                  </tr>";
+                }
+                mysqli_close($conn);
+              ?>
+          </table>
+        </div>
         <div id="pick_prof" style=display:none>
             <table>
                 <tr>
@@ -208,18 +244,27 @@ if($_SESSION['id']!=null) {
           c.style.display="block";
         }
       }
-      function rating() 
+
+      function rating()
       {
         var x = document.getElementById("rating");
-        if (x.innerHTML === "오름차순") 
+        var a = document.getElementById("pick_sub");
+        var b = document.getElementById("pick_sub2");
+
+        if (x.innerHTML === "오름차순")
         {
           x.innerHTML = "내림차순";
-        } 
-        else 
+          a.style.display="none";
+          b.style.display="block";
+        }
+        else
         {
           x.innerHTML = "오름차순";
+          a.style.display="block";
+          b.style.display="none";
         }
       }
+
     </script>
   </body>
 </html>
