@@ -12,7 +12,6 @@
   $prof_id=$row['prof_id'];
   $sub_grade=$row['sub_grade'];
   $prof_name=$row['prof_name'];
-
 ?>
 
 <html>
@@ -55,15 +54,19 @@
 
     <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
     <br><br>
+
     <div>
         <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span><button onclick="">과목 담기</button></div>
-        <p> <? echo "$dept_name","  ","$sub_grade","학년";?></p>
-    </div>
-    <br><br><br><br>
+        <br><br><br><br>
+    <label style="font-size:20px;"><? echo "&nbsp;&nbsp;&nbsp;&nbsp;<","$dept_name","  ","$sub_grade","학년>";?></label>
+    <br><br>
     <div style = "border: solid 1px; width: 33%; padding: 20px;">
-        <form action="/action_page.php">
+      <form action="/evaluate.php" method = "post" >
+        <script>
+        jQuery("$sub_id").submit();
+        </script>
             <label for="score">평점 남기기: </label>
-            <select id="score" name="sc">
+            <select id="score" name="score">
                 <option value="0">0점</option>
                 <option value="1">1점</option>
                 <option value="2">2점</option>
@@ -71,9 +74,8 @@
                 <option value="4">4점</option>
                 <option value="5">5점</option>
             </select><br>
-
         <p>후기 남기기</p>
-            <textarea name="message" rows="10" cols="30">코멘트를 남기세요.</textarea>
+            <textarea name="comment" rows="10" cols="30">코멘트를 남기세요.</textarea>
             <input type="submit">
         </form>
     </div>
