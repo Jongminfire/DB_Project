@@ -1,3 +1,8 @@
+<?php
+session_start();
+if($_SESSION['id']!=null) {
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -285,3 +290,10 @@
     </script>
   </body>
 </html>
+
+<?php
+}else{
+
+  echo "<script>alert('로그인이 필요합니다.'); location.href='./main1.php';</script>";
+}
+?>
