@@ -15,6 +15,8 @@
   if(!$num)
   {
     echo "$comment";
+    echo "$sub_id";
+    echo "$prof_id";
   }
 
   else
