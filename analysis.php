@@ -1,3 +1,8 @@
+<?php
+session_start();
+if($_SESSION['id']!=null) {
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -54,9 +59,9 @@
   </head>
 
   <body>
-
-    <h2>세종GG</h2>
-
+    <center>
+    <img src="https://log.op.gg/wp-content/uploads/1999/01/logo_opgg_blue_18x3.png" alt="logo" style="width:360px;height:60px;">
+  </center>
     <div>
       <div class="split left">
         <ul>
@@ -286,3 +291,10 @@
     </script>
   </body>
 </html>
+
+<?php
+}else{
+
+  echo "<script>alert('로그인이 필요합니다.'); location.href='./main1.php';</script>";
+}
+?>
