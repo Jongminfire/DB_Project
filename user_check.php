@@ -10,7 +10,7 @@
   $row = mysqli_fetch_array($result);
 
   $user_id = $row['user_id'];
-  $user_pwd = $row['user_id'];
+  $user_pwd = $row['user_pwd'];
   $dept_name = $row['dept_name'];
   $user_grade = $row['user_grade'];
 
