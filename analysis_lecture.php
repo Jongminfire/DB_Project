@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+<?
+  include './dbconn.php';
+
+  $sub_id = $_GET['id'];
+
+  $query ="select sub_id,dept_name,subject.prof_id,sub_name,sub_grade,prof_name from subject inner join professor on professor.prof_id=subject.prof_id where sub_id = '$sub_id'";
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_array($result);
+
+  $sub_name=$row['sub_name'];
+  $dept_name=$row['dept_name'];
+  $prof_id=$row['prof_id'];
+  $sub_grade=$row['sub_grade'];
+  $prof_name=$row['prof_name'];
+
+?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -40,7 +56,7 @@
     <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
     <br><br>
     <div>
-        <div style="float:left; font-size:50px;">컴퓨터그래픽스__<span style="font-size:35px;">송오영  </span><button onclick="">과목 담기</button></div>        
+        <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span><button onclick="">과목 담기</button></div>
     </div>
     <br><br><br><br>
     <div style = "border: solid 1px; width: 33%; padding: 20px;">
@@ -64,7 +80,7 @@
     <div>
         <div class="split left">
             <ul>
-                <li style="font-size:25px;">강의 후기</li> 
+                <li style="font-size:25px;">강의 후기</li>
             </ul>
             <div id="pick_sub">
                 <table>
