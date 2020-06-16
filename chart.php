@@ -57,14 +57,15 @@ if($_SESSION['id']!=null) {
         <div id="pick_sub">
             <table>
                 <tr>
-                  <td>교과목명</td>
-                  <td>학년</td>
-                  <td>학과</td>
-                  <td>담당교수</td>
-                  <td>강의실</td>
-                  <td>강의시간</td>
-                  <td>분반</td>
-                  <td>경쟁률 <button onclick="rating()"><span id="rating">오름차순</span></button></td>
+                  <th>교과목명</th>
+                  <th>학년</th>
+                  <th>학과</th>
+                  <th>담당교수</th>
+                  <th>강의실</th>
+                  <th>강의시간</th>
+                  <th>분반</th>
+                  <th>경쟁률 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
+                  <th>과목담기</th>
                 </tr>
                 <?
                   include './dbconn.php'; //dpconn 내용 중복되지 않게
@@ -83,7 +84,9 @@ if($_SESSION['id']!=null) {
                       <td>$row[강의실]</td>
                       <td>$row[강의시간]</td>
                       <td>$row[분반]</td>
-                      <td>$row[경쟁률]</td>
+                      <td>$row[경쟁률]</td>";?>
+                      <td><button onclick="">과목 담기</button></td>
+                      <? echo"
                     </tr>";
                   }
                   mysqli_close($conn);
@@ -92,38 +95,41 @@ if($_SESSION['id']!=null) {
         </div>
         <div id="pick_sub2" style=display:none>
           <table>
-              <tr>
-                <td>교과목명</td>
-                <td>학년</td>
-                <td>학과</td>
-                <td>담당교수</td>
-                <td>강의실</td>
-                <td>강의시간</td>
-                <td>분반</td>
-                <td>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></td>
-              </tr>
-              <?
-                include './dbconn.php'; //dpconn 내용 중복되지 않게
+            <tr>
+              <th>교과목명</th>
+              <th>학년</th>
+              <th>학과</th>
+              <th>담당교수</th>
+              <th>강의실</th>
+              <th>강의시간</th>
+              <th>분반</th>
+              <th>경쟁률 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
+              <th>과목담기</th>
+            </tr>
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-                $query = "call competition_DESC('$dept_name')";
-                $result = mysqli_query($conn,$query);
+              $query = "call competition_ASC('$dept_name')";
+              $result = mysqli_query($conn,$query);
 
-                while($row = mysqli_fetch_array($result))
-                {
-                  echo "
-                  <tr>
-                    <td>$row[교과목명]</td>
-                    <td>$row[학년]</td>
-                    <td>$row[학과]</td>
-                    <td>$row[담당교수]</td>
-                    <td>$row[강의실]</td>
-                    <td>$row[강의시간]</td>
-                    <td>$row[분반]</td>
-                    <td>$row[경쟁률]</td>
-                  </tr>";
-                }
-                mysqli_close($conn);
-              ?>
+              while($row = mysqli_fetch_array($result))
+              {
+                echo "
+                <tr>
+                  <td>$row[교과목명]</td>
+                  <td>$row[학년]</td>
+                  <td>$row[학과]</td>
+                  <td>$row[담당교수]</td>
+                  <td>$row[강의실]</td>
+                  <td>$row[강의시간]</td>
+                  <td>$row[분반]</td>
+                  <td>$row[경쟁률]</td>";?>
+                  <td><button onclick="">과목 담기</button></td>
+                  <? echo"
+                </tr>";
+              }
+              mysqli_close($conn);
+            ?>
           </table>
         </div>
         <div id="pick_prof" style=display:none>
