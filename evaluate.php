@@ -14,13 +14,14 @@
 
   if(!$num)
   {
-    echo "$comment";
-    echo "$sub_id";
-    echo "$prof_id";
+    $query2 = "insert into evaluation (sub_id,user_id,prof_id,score,comment) values ('$sub_id','$id','$prof_id','$score','$comment')";
+    $result2 = mysqli_query($conn,$query2);
+
+    echo "<script>location.href='analysis_lecture.php?id=$sub_id';</script>";
   }
 
   else
   {
-    echo "<script>alert('이미 평가한 과목입니다!'); location.href='.analysis_lecture.php?id=$sub_id';</script>";
+    echo "<script>alert('이미 평가한 과목입니다!'); location.href='analysis_lecture.php?id=$sub_id';</script>";
   }
 ?>

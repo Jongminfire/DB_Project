@@ -258,7 +258,7 @@ if($_SESSION['id']!=null) {
         var x = document.getElementById("rating");
         var a = document.getElementById("pick_sub");
         var b = document.getElementById("pick_sub2");
-        
+
 
         if (x.innerHTML === "오름차순")
         {

@@ -48,7 +48,7 @@ if($_SESSION['id']!=null) {
       p
       {
         margin: 30px;
-        margin-top:50px; 
+        margin-top:50px;
         margin-bottom: 50px;
       }
     </style>
@@ -79,10 +79,24 @@ if($_SESSION['id']!=null) {
           <th>코멘트</th>
         </tr>
         <tr>
-          <td><? echo "$user_id";?></td>
-          <td><? echo "$user_pwd";?></td>
-          <td><? echo "$dept_name";?></td>
-          <td><? echo "$user_grade";?></td>
+          <?
+            include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+            $query = "Select sub_name,subject.sub_id,prof_name,score,comment from evaluation inner join subject inner join professor on subject.prof_id = professor.prof_id on evaluation.sub_id = subject.sub_id where evaluation.user_id = '$user_id';";
+            $result = mysqli_query($conn,$query);
+
+            while($row = mysqli_fetch_array($result))
+            {
+              echo "
+              <tr>
+                <td><a href = 'analysis_lecture.php?id=$row[sub_id]'>$row[sub_name]</a></td>
+                <td>$row[prof_name]</td>
+                <td>$row[score]</td>
+                <td>$row[comment]</td>
+              </tr>";
+            }
+            mysqli_close($conn);
+          ?>
         </tr>
       </table>
     </p>

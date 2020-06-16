@@ -12,6 +12,12 @@
   $prof_id=$row['prof_id'];
   $sub_grade=$row['sub_grade'];
   $prof_name=$row['prof_name'];
+
+  $query3 = "select sum(score)/count(*) as '평균평점' from evaluation where sub_id='$sub_id'";
+  $result3 = mysqli_query($conn, $query3);
+  $row3 = mysqli_fetch_array($result3);
+
+  $score = $row3['평균평점'];
 ?>
 
 <html>
@@ -58,7 +64,7 @@
     <div>
         <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span><button onclick="">과목 담기</button></div>
         <br><br><br><br>
-    <label style="font-size:20px;"><? echo "&nbsp;&nbsp;&nbsp;&nbsp;<","$dept_name","  ","$sub_grade","학년>";?></label>
+    <label style="font-size:20px;"><? echo "&nbsp;&nbsp;&nbsp;&nbsp;<","$dept_name","  ","$sub_grade","학년>"," ","평균평점:","$score";?></label>
     <br><br>
     <div style = "border: solid 1px; width: 33%; padding: 20px;">
       <form action="/evaluate.php" method = "post">
@@ -87,16 +93,27 @@
             <div id="pick_sub">
                 <table>
                     <tr>
-                        <td>별로에요</td>
-                        <td>0점</td>
-                    </tr>
-                    <tr>
-                        <td>좋아요</td>
-                        <td>4점</td>
-                    </tr>
-                    <tr>
-                        <td>그냥 그래요</td>
-                        <td>2점</td>
+                      <td>아이디</td>
+                      <td>평점</td>
+                      <td>코멘트</td>
+
+                      <?
+                        include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+                        $query2 = "Select * from evaluation where prof_id = '$prof_id'";
+                        $result2 = mysqli_query($conn,$query2);
+
+                        while($row2 = mysqli_fetch_array($result2))
+                        {
+                          echo "
+                          <tr>
+                            <td>$row2[user_id]</td>
+                            <td>$row2[score]</td>
+                            <td>$row2[comment]</td>
+                          </tr>";
+                        }
+                        mysqli_close($conn);
+                      ?>
                     </tr>
                 </table>
             </div>
