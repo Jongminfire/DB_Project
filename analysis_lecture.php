@@ -60,12 +60,12 @@
 
     <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
     <br><br>
-
+    <center>
     <div>
-        <div style="float:left; font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span></div>
-        <br><br><br><br>
+        <div style="font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span></div>
+        <br>
     <label style="font-size:20px;"><? echo "&nbsp;&nbsp;&nbsp;&nbsp;<","$dept_name","  ","$sub_grade","학년>"," ","평균평점:","$score";?></label>
-    <br><br>
+    <br><br><br>
     <div style = "border: solid 1px; width: 33%; padding: 20px;">
       <form action="/evaluate.php" method = "post">
             <label for="score">평점 남기기: </label>
@@ -84,6 +84,7 @@
             <input type="submit">
         </form>
     </div>
+  </center>
     <br><br>
     <div>
         <div class="split left">

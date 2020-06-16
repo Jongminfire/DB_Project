@@ -149,19 +149,19 @@ if($_SESSION['id']!=null) {
 
               $query2 = "select subject.sub_id,sub_name,prof_name,dept_name,sum(score)/count(score) as '평균평점' from evaluation inner join subject inner join professor on professor.prof_id = subject.prof_id on subject.sub_id = evaluation.sub_id group by evaluation.sub_id order by 평균평점 DESC";
               $result2 = mysqli_query($conn,$query2);
-              $count =1;
+              $count2 =1;
               while($row2 = mysqli_fetch_array($result2))
               {
                 echo "
                 <tr>
-                  <td>$count</td>
+                  <td>$count2</td>
                   <td><a href = 'analysis_lecture.php?id=$row2[sub_id]'> $row2[sub_name]</a></td>
                   <td>$row2[dept_name]</td>
                   <td>$row2[prof_name]</td>
                   <td>$row2[평균평점]</td>
                 </tr>";
 
-                $count++;
+                $count2++;
               }
               mysqli_close($conn);
             ?>
@@ -278,6 +278,7 @@ if($_SESSION['id']!=null) {
           b.style.display="none";
           c.style.display="none";
           d.style.display="none";
+
         }
         else if(mode === 2)
         {

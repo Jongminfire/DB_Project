@@ -103,6 +103,7 @@ if($_SESSION['id']!=null) {
     <p>
       <table><h1>내가 담은 과목</h1>
         <tr>
+          <th>순위</th>
           <th>과목명</th>
           <th>교수님</th>
           <th>학과</th>
@@ -123,9 +124,10 @@ if($_SESSION['id']!=null) {
             $query3 = "select sum(score)/count(*) as '평균평점' from evaluation where sub_id= $row2[sub_id]";
             $result3 = mysqli_query($conn, $query3);
             $row3 = mysqli_fetch_array($result3);
-
+            $count =1;
             echo "
             <tr>
+              <td>$count</td>
               <td><a href = 'analysis_lecture.php?id=$row2[sub_id]'>$row2[sub_name]</a></td>
               <td>$row2[prof_name]</td>
               <td>$row2[dept_name]</td>
@@ -139,6 +141,8 @@ if($_SESSION['id']!=null) {
               </form>
               <? echo"
             </tr>";
+
+            $count++;
           }
           mysqli_close($conn);
         ?>

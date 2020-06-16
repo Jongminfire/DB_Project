@@ -97,6 +97,7 @@ if($_SESSION['id']!=null) {
 
                     $count++;
                   }
+
                   mysqli_close($conn);
                 ?>
             </table>
@@ -120,12 +121,12 @@ if($_SESSION['id']!=null) {
 
               $query = "call competition_DESC('$dept_name')";
               $result = mysqli_query($conn,$query);
-
+              $count2 = 1;
               while($row = mysqli_fetch_array($result))
               {
                 echo "
                 <tr>
-                  <td>$count</td>
+                  <td>$count2</td>
                   <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
                   <td>$row[학년]</td>
                   <td>$row[학과]</td>
@@ -140,6 +141,8 @@ if($_SESSION['id']!=null) {
                   </form>
                   <? echo"
                 </tr>";
+
+                $count2++;
               }
               mysqli_close($conn);
             ?>
