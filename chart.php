@@ -77,7 +77,7 @@ if($_SESSION['id']!=null) {
                   {
                     echo "
                     <tr>
-                      <td>$row[교과목명]</td>
+                      <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
                       <td>$row[학년]</td>
                       <td>$row[학과]</td>
                       <td>$row[담당교수]</td>
