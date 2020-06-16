@@ -107,17 +107,35 @@ if($_SESSION['id']!=null) {
           <th>교수님</th>
           <th>학과</th>
           <th>학년</th>
+          <th>분반</th>
           <th>평점</th>
           <th>경쟁률</th>
         </tr>
-        <tr>
-          <td><? echo "$user_id";?></td>
-          <td><? echo "$user_pwd";?></td>
-          <td><? echo "$dept_name";?></td>
-          <td><? echo "$user_grade";?></td>
-          <td><? echo "$user_grade";?></td>
-          <td><? echo "$user_grade";?></td>
-        </tr>
+        <?
+          include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+          $query2 = "Select class.class_id,class_no,subject.sub_id,sub_name,prof_name,dept_name,sub_grade,class_pick/class_size as '경쟁률' from user_subject inner join class inner join subject inner join professor on professor.prof_id = subject.prof_id on class.sub_id = subject.sub_id on class.class_id = user_subject.class_id where user_id='$user_id' order by 경쟁률 DESC";
+          $result2 = mysqli_query($conn,$query2);
+
+          while($row2 = mysqli_fetch_array($result2))
+          {
+            $query3 = "select sum(score)/count(*) as '평균평점' from evaluation where sub_id= $row2[sub_id]";
+            $result3 = mysqli_query($conn, $query3);
+            $row3 = mysqli_fetch_array($result3);
+
+            echo "
+            <tr>
+              <td><a href = 'analysis_lecture.php?id=$row2[sub_id]'>$row2[sub_name]</a></td>
+              <td>$row2[prof_name]</td>
+              <td>$row2[dept_name]</td>
+              <td>$row2[sub_grade]</td>
+              <td>$row2[class_no]</td>
+              <td>$row3[평균평점]</td>
+              <td>$row2[경쟁률]</td>
+            </tr>";
+          }
+          mysqli_close($conn);
+        ?>
       </table>
     </p>
   </body>
