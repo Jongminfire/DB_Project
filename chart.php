@@ -85,7 +85,10 @@ if($_SESSION['id']!=null) {
                       <td>$row[강의시간]</td>
                       <td>$row[분반]</td>
                       <td>$row[경쟁률]</td>";?>
-                      <td><button onclick="">과목 담기</button></td>
+                      <form action="/pick.php" method = "post">
+                      <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
+                      <td><button onclick="submit">과목 담기</button></td>
+                      </form>
                       <? echo"
                     </tr>";
                   }
@@ -103,28 +106,31 @@ if($_SESSION['id']!=null) {
               <th>강의실</th>
               <th>강의시간</th>
               <th>분반</th>
-              <th>경쟁률 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
+              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
               <th>과목담기</th>
             </tr>
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query2 = "call competition_DESC('$dept_name')";
-              $result2 = mysqli_query($conn,$query2);
+              $query = "call competition_DESC('$dept_name')";
+              $result = mysqli_query($conn,$query);
 
-              while($row2 = mysqli_fetch_array($result2))
+              while($row = mysqli_fetch_array($result))
               {
                 echo "
                 <tr>
-                  <td>$row2[교과목명]</td>
-                  <td>$row2[학년]</td>
-                  <td>$row2[학과]</td>
-                  <td>$row2[담당교수]</td>
-                  <td>$row2[강의실]</td>
-                  <td>$row2[강의시간]</td>
-                  <td>$row2[분반]</td>
-                  <td>$row2[경쟁률]</td>";?>
-                  <td><button onclick="">과목 담기</button></td>
+                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
+                  <td>$row[학년]</td>
+                  <td>$row[학과]</td>
+                  <td>$row[담당교수]</td>
+                  <td>$row[강의실]</td>
+                  <td>$row[강의시간]</td>
+                  <td>$row[분반]</td>
+                  <td>$row[경쟁률]</td>";?>
+                  <form action="/pick.php" method = "post">
+                  <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
+                  <td><button onclick="submit">과목 담기</button></td>
+                  </form>
                   <? echo"
                 </tr>";
               }
