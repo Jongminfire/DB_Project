@@ -197,24 +197,28 @@ if($_SESSION['id']!=null) {
       function hideANDshow(mode)
       {
         var x = document.getElementById("pick_sub");
+        var x2= document.getElementById("pick_sub2");
         var y = document.getElementById("pick_prof");
         var a = document.getElementById("pick_temp1");
         var b = document.getElementById("pick_temp2");
         var c = document.getElementById("pick_temp3");
-
+        var but = document.getElementById("rating");
 
         if(mode === 1)
         {
           x.style.display="block";
+          x2.style.display="none";
           y.style.display="none";
           a.style.display="none";
           b.style.display="none";
           c.style.display="none";
+          but.innerHTML = "오름차순";
 
         }
         else if(mode === 2)
         {
           x.style.display="none";
+          x2.style.display="none";
           y.style.display="block";
           a.style.display="none";
           b.style.display="none";
@@ -223,6 +227,7 @@ if($_SESSION['id']!=null) {
         else if(mode === 3)
         {
           x.style.display="none";
+          x2.style.display="none";
           y.style.display="none";
           a.style.display="block";
           b.style.display="none";
@@ -231,6 +236,7 @@ if($_SESSION['id']!=null) {
         else if(mode === 4)
         {
           x.style.display="none";
+          x2.style.display="none";
           y.style.display="none";
           a.style.display="none";
           b.style.display="block";
@@ -239,6 +245,7 @@ if($_SESSION['id']!=null) {
         else if(mode === 5)
         {
           x.style.display="none";
+          x2.style.display="none";
           y.style.display="none";
           a.style.display="none";
           b.style.display="none";
@@ -251,6 +258,7 @@ if($_SESSION['id']!=null) {
         var x = document.getElementById("rating");
         var a = document.getElementById("pick_sub");
         var b = document.getElementById("pick_sub2");
+        
 
         if (x.innerHTML === "오름차순")
         {
