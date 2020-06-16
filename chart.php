@@ -57,6 +57,7 @@ if($_SESSION['id']!=null) {
         <div id="pick_sub">
             <table>
                 <tr>
+                  <th>순위</th>
                   <th>교과목명</th>
                   <th>학년</th>
                   <th>학과</th>
@@ -72,11 +73,13 @@ if($_SESSION['id']!=null) {
 
                   $query = "call competition_ASC('$dept_name')";
                   $result = mysqli_query($conn,$query);
+                  $count = 1;
 
                   while($row = mysqli_fetch_array($result))
                   {
                     echo "
                     <tr>
+                      <td>$count</td>
                       <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
                       <td>$row[학년]</td>
                       <td>$row[학과]</td>
@@ -91,6 +94,8 @@ if($_SESSION['id']!=null) {
                       </form>
                       <? echo"
                     </tr>";
+
+                    $count++;
                   }
                   mysqli_close($conn);
                 ?>
@@ -99,6 +104,7 @@ if($_SESSION['id']!=null) {
         <div id="pick_sub2" style=display:none>
           <table>
             <tr>
+              <th>순위</th>
               <th>교과목명</th>
               <th>학년</th>
               <th>학과</th>
@@ -119,6 +125,7 @@ if($_SESSION['id']!=null) {
               {
                 echo "
                 <tr>
+                  <td>$count</td>
                   <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
                   <td>$row[학년]</td>
                   <td>$row[학과]</td>

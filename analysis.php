@@ -71,7 +71,7 @@ if($_SESSION['id']!=null) {
           <table>
             <tr>
               <th>학과</th>
-              <th>교수님 아이디</th>
+              <th>교수명</th>
               <th>강의명</th>
               <th>학년</th>
             </tr>
@@ -100,22 +100,26 @@ if($_SESSION['id']!=null) {
         <div id="pick_prof" style=display:none>
           <table>
             <tr>
+              <th>순위</th>
               <th>교수명</th>
               <th>평점</th>
             </tr>
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "Select * from professor";
+              $query = "select prof_name,sum(score)/count(score) as '평점' from evaluation inner join professor on professor.prof_id = evaluation.prof_id group by evaluation.prof_id order by 평점 DESC;";
               $result = mysqli_query($conn,$query);
-
+              $count =1;
               while($row = mysqli_fetch_array($result))
               {
                 echo "
                 <tr>
+                  <td>$count</td>
                   <td>$row[prof_name]</td>
-                  <td>$row[prof_id]</td>
+                  <td>$row[평점]</td>
                 </tr>";
+
+                $count++;
               }
               mysqli_close($conn);
             ?>
@@ -134,23 +138,33 @@ if($_SESSION['id']!=null) {
         <div id="pick1">
           <table>
             <tr>
-              <th>챔피언</th>
-              <th>승률</th>
-              <th>픽률</th>
-              <th>티어</th>
+              <th>순위</th>
+              <th>강의명</th>
+              <th>교수</th>
+              <th>학과</th>
+              <th>평점</th>
             </tr>
-            <tr>
-              <td>바텀</td>
-              <td>11</td>
-              <td>16</td>
-              <td>21</td>
-            </tr>
-            <tr>
-              <td>바텀</td>
-              <td>23</td>
-              <td>82</td>
-              <td>92</td>
-            </tr>
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+              $query2 = "select subject.sub_id,sub_name,prof_name,dept_name,sum(score)/count(score) as '평균평점' from evaluation inner join subject inner join professor on professor.prof_id = subject.prof_id on subject.sub_id = evaluation.sub_id group by evaluation.sub_id order by 평균평점 DESC";
+              $result2 = mysqli_query($conn,$query2);
+              $count =1;
+              while($row2 = mysqli_fetch_array($result2))
+              {
+                echo "
+                <tr>
+                  <td>$count</td>
+                  <td><a href = 'analysis_lecture.php?id=$row2[sub_id]'> $row2[sub_name]</a></td>
+                  <td>$row2[dept_name]</td>
+                  <td>$row2[prof_name]</td>
+                  <td>$row2[평균평점]</td>
+                </tr>";
+
+                $count++;
+              }
+              mysqli_close($conn);
+            ?>
           </table>
         </div>
         <div id="pick2" style=display:none>
