@@ -36,68 +36,54 @@ if($_SESSION['id']!=null) {
       {
            float: left;
         }
-      /* Create two equal columns that floats next to each other */
-      .split
-      {
-        height: 100%;
-        width: 50%;
-        position: fixed;
-        overflow-x: hidden;
-        padding-top: 20px;
-      }
-
-      .left
-      {
-        left: 0;
-      }
-
-      .right
-      {
-        right: 0;
-      }
     </style>
   </head>
 
   <body>
 
     <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
-    <div>
-      <div class="split left">
+
+
+
+
+      <div>
         <ul>
-            <li><button onclick="hideANDshow(1)">강의</button></li>
-            <li><button onclick="hideANDshow(2)">교수</button></li>
-         </ul>
-        <div id="pick_sub">
+          <li><button onclick="hideANDshow2(1)">강의 평점 순</button></li>
+          <li><button onclick="hideANDshow2(2)">교수님 평점 순</button></li>
+        </ul>
+        <div id="pick1">
           <table>
             <tr>
-              <th>학과</th>
-              <th>교수명</th>
+              <th>순위</th>
               <th>강의명</th>
-              <th>학년</th>
+              <th>학과</th>
+              <th>교수</th>
+              <th>평점</th>
             </tr>
-
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "Select * from subject inner join professor on professor.prof_id = subject.prof_id";
-              $result = mysqli_query($conn,$query);
-
-              while($row = mysqli_fetch_array($result))
+              $query2 = "select subject.sub_id,sub_name,prof_name,dept_name,sum(score)/count(score) as '평균평점' from evaluation inner join subject inner join professor on professor.prof_id = subject.prof_id on subject.sub_id = evaluation.sub_id group by evaluation.sub_id order by 평균평점 DESC";
+              $result2 = mysqli_query($conn,$query2);
+              $count =1;
+              while($row2 = mysqli_fetch_array($result2))
               {
                 echo "
                 <tr>
-                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[sub_name]</a></td>
-                  <td>$row[prof_name]</td>
-                  <td>$row[dept_name]</td>
-                  <td>$row[sub_grade]</td>
+                  <td>$count</td>
+                  <td><a href = 'analysis_lecture.php?id=$row2[sub_id]'> $row2[sub_name]</a></td>
+                  <td>$row2[dept_name]</td>
+                  <td>$row2[prof_name]</td>
+                  <td>$row2[평균평점]</td>
                 </tr>";
+
+                $count++;
               }
               mysqli_close($conn);
             ?>
-
           </table>
         </div>
-        <div id="pick_prof" style=display:none>
+        <div id="pick2" style=display:none>
           <table>
             <tr>
               <th>순위</th>
@@ -125,181 +111,27 @@ if($_SESSION['id']!=null) {
             ?>
           </table>
         </div>
-      </div>
-
-
-      <div class="split right">
-        <ul>
-          <li><button onclick="hideANDshow2(1)">바텀</button></li>
-          <li><button onclick="hideANDshow2(2)">탑</button></li>
-          <li><button onclick="hideANDshow2(3)">정글</button></li>
-          <li><button onclick="hideANDshow2(4)">미드</button></li>
-        </ul>
-        <div id="pick1">
-          <table>
-            <tr>
-              <th>순위</th>
-              <th>강의명</th>
-              <th>교수</th>
-              <th>학과</th>
-              <th>평점</th>
-            </tr>
-            <?
-              include './dbconn.php'; //dpconn 내용 중복되지 않게
-
-              $query2 = "select subject.sub_id,sub_name,prof_name,dept_name,sum(score)/count(score) as '평균평점' from evaluation inner join subject inner join professor on professor.prof_id = subject.prof_id on subject.sub_id = evaluation.sub_id group by evaluation.sub_id order by 평균평점 DESC";
-              $result2 = mysqli_query($conn,$query2);
-              $count2 =1;
-              while($row2 = mysqli_fetch_array($result2))
-              {
-                echo "
-                <tr>
-                  <td>$count2</td>
-                  <td><a href = 'analysis_lecture.php?id=$row2[sub_id]'> $row2[sub_name]</a></td>
-                  <td>$row2[dept_name]</td>
-                  <td>$row2[prof_name]</td>
-                  <td>$row2[평균평점]</td>
-                </tr>";
-
-                $count2++;
-              }
-              mysqli_close($conn);
-            ?>
-          </table>
-        </div>
-        <div id="pick2" style=display:none>
-          <table>
-            <tr>
-              <th>챔피언</th>
-              <th>승률</th>
-              <th>픽률</th>
-              <th>티어</th>
-            </tr>
-            <tr>
-              <td>탑</td>
-              <td>7</td>
-              <td>18</td>
-              <td>11</td>
-            </tr>
-            <tr>
-              <td>탑</td>
-              <td>12</td>
-              <td>22</td>
-              <td>23</td>
-            </tr>
-          </table>
-        </div>
-        <div id="pick3" style=display:none>
-          <table>
-            <tr>
-              <th>챔피언</th>
-              <th>승률</th>
-              <th>픽률</th>
-              <th>티어</th>
-            </tr>
-            <tr>
-              <td>정글</td>
-              <td>11</td>
-              <td>41</td>
-              <td>15</td>
-            </tr>
-            <tr>
-              <td>정글</td>
-              <td>12</td>
-              <td>25</td>
-              <td>2</td>
-            </tr>
-          </table>
-        </div>
-        <div id="pick4" style=display:none>
-          <table>
-            <tr>
-              <th>챔피언</th>
-              <th>승률</th>
-              <th>픽률</th>
-              <th>티어</th>
-            </tr>
-            <tr>
-              <td>미드</td>
-              <td>12</td>
-              <td>3</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>미드</td>
-              <td>23</td>
-              <td>21</td>
-              <td>52</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
     </div>
 
     <script type="text/javascript">
-      function hideANDshow(mode)
-      {
-        var x = document.getElementById("pick_sub");
-        var y = document.getElementById("pick_prof");
 
-        if(x.style.display === "none" && mode === 1)
-        {
-          x.style.display="block";
-          y.style.display="none";
-        }
-        else if(x.style.display === "none" && mode === 2)
-        {
-          x.style.display="none";
-          y.style.display="block";
-        }
-        else if(y.style.display === "none" && mode === 1)
-        {
-          x.style.display="block";
-          y.style.display="none";
-        }
-        else if(y.style.display === "none" && mode === 2)
-        {
-          x.style.display="none";
-          y.style.display="block";
-        }
-      }
 
       function hideANDshow2(mode)
       {
         var a = document.getElementById("pick1");
         var b = document.getElementById("pick2");
-        var c = document.getElementById("pick3");
-        var d = document.getElementById("pick4");
 
         if(mode === 1)
         {
           a.style.display="block";
           b.style.display="none";
-          c.style.display="none";
-          d.style.display="none";
+
 
         }
         else if(mode === 2)
         {
           a.style.display="none";
           b.style.display="block";
-          c.style.display="none";
-          d.style.display="none";
-        }
-        else if(mode === 3)
-        {
-          a.style.display="none";
-          b.style.display="none";
-          c.style.display="block";
-          d.style.display="none";
-        }
-        else if(mode === 4)
-        {
-          a.style.display="none";
-          b.style.display="none";
-          c.style.display="none";
-          d.style.display="block";
         }
       }
     </script>
