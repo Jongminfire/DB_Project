@@ -118,13 +118,13 @@ if($_SESSION['id']!=null) {
 
           $query2 = "Select class.class_id,class_no,subject.sub_id,sub_name,prof_name,dept_name,sub_grade,class_pick/class_size as '경쟁률' from user_subject inner join class inner join subject inner join professor on professor.prof_id = subject.prof_id on class.sub_id = subject.sub_id on class.class_id = user_subject.class_id where user_id='$user_id' order by 경쟁률 DESC";
           $result2 = mysqli_query($conn,$query2);
-
+          $count =1;
           while($row2 = mysqli_fetch_array($result2))
           {
             $query3 = "select sum(score)/count(*) as '평균평점' from evaluation where sub_id= $row2[sub_id]";
             $result3 = mysqli_query($conn, $query3);
             $row3 = mysqli_fetch_array($result3);
-            $count =1;
+
             echo "
             <tr>
               <td>$count</td>
