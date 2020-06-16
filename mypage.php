@@ -110,6 +110,7 @@ if($_SESSION['id']!=null) {
           <th>분반</th>
           <th>평점</th>
           <th>경쟁률</th>
+          <th>담기 취소</th>
         </tr>
         <?
           include './dbconn.php'; //dpconn 내용 중복되지 않게
@@ -131,7 +132,12 @@ if($_SESSION['id']!=null) {
               <td>$row2[sub_grade]</td>
               <td>$row2[class_no]</td>
               <td>$row3[평균평점]</td>
-              <td>$row2[경쟁률]</td>
+              <td>$row2[경쟁률]</td>";?>
+              <form action="/cancel.php" method = "post">
+                <input type=hidden name="class_id"  value=<?php echo $row2['class_id']?>>
+                <td><button onclick="submit">취소</button></td>
+              </form>
+              <? echo"
             </tr>";
           }
           mysqli_close($conn);
