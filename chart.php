@@ -109,21 +109,21 @@ if($_SESSION['id']!=null) {
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "call competition_ASC('$dept_name')";
-              $result = mysqli_query($conn,$query);
+              $query2 = "call competition_DESC('$dept_name')";
+              $result2 = mysqli_query($conn,$query2);
 
-              while($row = mysqli_fetch_array($result))
+              while($row2 = mysqli_fetch_array($result2))
               {
                 echo "
                 <tr>
-                  <td>$row[교과목명]</td>
-                  <td>$row[학년]</td>
-                  <td>$row[학과]</td>
-                  <td>$row[담당교수]</td>
-                  <td>$row[강의실]</td>
-                  <td>$row[강의시간]</td>
-                  <td>$row[분반]</td>
-                  <td>$row[경쟁률]</td>";?>
+                  <td>$row2[교과목명]</td>
+                  <td>$row2[학년]</td>
+                  <td>$row2[학과]</td>
+                  <td>$row2[담당교수]</td>
+                  <td>$row2[강의실]</td>
+                  <td>$row2[강의시간]</td>
+                  <td>$row2[분반]</td>
+                  <td>$row2[경쟁률]</td>";?>
                   <td><button onclick="">과목 담기</button></td>
                   <? echo"
                 </tr>";
