@@ -18,6 +18,11 @@
   $row3 = mysqli_fetch_array($result3);
 
   $score = $row3['평균평점'];
+
+  session_start();
+  ini_set('display_errors', '0');   //오류 메세지 무시
+  if($_SESSION['id']!=null) {
+
 ?>
 
 <html>
@@ -123,3 +128,9 @@
 
   </body>
 </html>
+<?php
+}else{
+
+  echo "<script>alert('로그인이 필요합니다.'); location.href='./main1.php';</script>";
+}
+?>
