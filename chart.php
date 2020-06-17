@@ -49,13 +49,12 @@ if($_SESSION['id']!=null) {
     <div>
         <div class="split left">
             <ul>
-                <li><button onclick="hideANDshow(1)">강의</button></li>
-                <li><button onclick="hideANDshow(2)">교수</button></li>
-                <li><button onclick="hideANDshow(3)">가</button></li>
-                <li><button onclick="hideANDshow(4)">나</button></li>
-                <li><button onclick="hideANDshow(5)">다</button></li>
+                <li><button onclick="hideANDshow(1)">전공</button></li>
+                <li><button onclick="hideANDshow(2)">교양</button></li>
+                <li style="float: right"><button onclick="hideANDshow(4)">추천순</button></li>
+                <li style="float: right"><button onclick="hideANDshow(3)">경쟁률순</button></li>
             </ul>
-        <div id="pick_sub">
+        <div id="major_competition_ASC">
             <table>
                 <tr>
                   <th>순위</th>
@@ -103,7 +102,7 @@ if($_SESSION['id']!=null) {
                 ?>
             </table>
         </div>
-        <div id="pick_sub2" style=display:none>
+        <div id="major_competition_DESC" style=display:none>
           <table>
             <tr>
               <th>순위</th>
@@ -149,151 +148,478 @@ if($_SESSION['id']!=null) {
             ?>
           </table>
         </div>
-        <div id="pick_prof" style=display:none>
-            <table>
-                <tr>
-                    <th>교수명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>김교수</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>이교수</td>
-                    <td>2점</td>
-                </tr>
-            </table>
-        </div>
-        <div id="pick_temp1" style=display:none>
-            <table>
-                <tr>
-                    <th>교ㄴ수명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>김ㄴ교수</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>이ㄴ교수</td>
-                    <td>2점</td>
-                </tr>
-            </table>
-        </div>
-        <div id="pick_temp2" style=display:none>
-            <table>
-                <tr>
-                    <th>교ㅋ수명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>김ㅋ교수</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>이ㅋ교수</td>
-                    <td>2점</td>
-                </tr>
-            </table>
-        </div>
-        <div id="pick_temp3" style=display:none>
-            <table>
-                <tr>
-                    <th>교ㅁ수명</th>
-                    <th>평점</th>
-                </tr>
-                <tr>
-                    <td>김ㅁ교수</td>
-                    <td>1점</td>
-                </tr>
-                <tr>
-                    <td>이ㅁ교수</td>
-                    <td>2점</td>
-                </tr>
-            </table>
-        </div>
+        <div id="major_recommendation_ASC" style=display:none>
+          <table>
+            <tr>
+              <th>순위</th>
+              <th>교과목명</th>
+              <th>학년</th>
+              <th>학과</th>
+              <th>담당교수</th>
+              <th>강의실</th>
+              <th>강의시간</th>
+              <th>분반</th>
+              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>과목담기</th>
+            </tr>
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
 
+              $query = "call competition_DESC('$dept_name')";
+              $result = mysqli_query($conn,$query);
+              $count2 = 1;
+              while($row = mysqli_fetch_array($result))
+              {
+                echo "
+                <tr>
+                  <td>$count2</td>
+                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
+                  <td>$row[학년]</td>
+                  <td>$row[학과]</td>
+                  <td>$row[담당교수]</td>
+                  <td>$row[강의실]</td>
+                  <td>$row[강의시간]</td>
+                  <td>$row[분반]</td>
+                  <td>$row[경쟁률]</td>";?>
+                  <form action="/pick.php" method = "post">
+                  <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
+                  <td><button onclick="submit">과목 담기</button></td>
+                  </form>
+                  <? echo"
+                </tr>";
+
+                $count2++;
+              }
+              mysqli_close($conn);
+            ?>
+          </table>
+        </div>
+        <div id="major_recommendation_DESC" style=display:none>
+          <table>
+            <tr>
+              <th>순위</th>
+              <th>교과목명</th>
+              <th>학년</th>
+              <th>학과</th>
+              <th>담당교수</th>
+              <th>강의실</th>
+              <th>강의시간</th>
+              <th>분반</th>
+              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>과목담기</th>
+            </tr>
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+              $query = "call competition_DESC('$dept_name')";
+              $result = mysqli_query($conn,$query);
+              $count2 = 1;
+              while($row = mysqli_fetch_array($result))
+              {
+                echo "
+                <tr>
+                  <td>$count2</td>
+                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
+                  <td>$row[학년]</td>
+                  <td>$row[학과]</td>
+                  <td>$row[담당교수]</td>
+                  <td>$row[강의실]</td>
+                  <td>$row[강의시간]</td>
+                  <td>$row[분반]</td>
+                  <td>$row[경쟁률]</td>";?>
+                  <form action="/pick.php" method = "post">
+                  <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
+                  <td><button onclick="submit">과목 담기</button></td>
+                  </form>
+                  <? echo"
+                </tr>";
+
+                $count2++;
+              }
+              mysqli_close($conn);
+            ?>
+          </table>
+        </div>
+        
+        <div id="elective_competition_ASC" style=display:none>
+            <table>
+                <tr>
+                  <th>순위</th>
+                  <th>교과목명</th>
+                  <th>학년</th>
+                  <th>학과</th>
+                  <th>담당교수</th>
+                  <th>강의실</th>
+                  <th>강의시간</th>
+                  <th>분반</th>
+                  <th>경쟁률 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
+                  <th>과목담기</th>
+                </tr>
+                <?
+                  include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+                  $query = "call competition_ASC('$dept_name')";
+                  $result = mysqli_query($conn,$query);
+                  $count = 1;
+
+                  while($row = mysqli_fetch_array($result))
+                  {
+                    echo "
+                    <tr>
+                      <td>$count</td>
+                      <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
+                      <td>$row[학년]</td>
+                      <td>$row[학과]</td>
+                      <td>$row[담당교수]</td>
+                      <td>$row[강의실]</td>
+                      <td>$row[강의시간]</td>
+                      <td>$row[분반]</td>
+                      <td>$row[경쟁률]</td>";?>
+                      <form action="/pick.php" method = "post">
+                      <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
+                      <td><button onclick="submit">과목 담기</button></td>
+                      </form>
+                      <? echo"
+                    </tr>";
+
+                    $count++;
+                  }
+
+                  mysqli_close($conn);
+                ?>
+            </table>
+        </div>
+        <div id="elective_competition_DESC" style=display:none>
+          <table>
+            <tr>
+              <th>순위</th>
+              <th>교과목명</th>
+              <th>학년</th>
+              <th>학과</th>
+              <th>담당교수</th>
+              <th>강의실</th>
+              <th>강의시간</th>
+              <th>분반</th>
+              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>과목담기</th>
+            </tr>
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+              $query = "call competition_DESC('$dept_name')";
+              $result = mysqli_query($conn,$query);
+              $count2 = 1;
+              while($row = mysqli_fetch_array($result))
+              {
+                echo "
+                <tr>
+                  <td>$count2</td>
+                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
+                  <td>$row[학년]</td>
+                  <td>$row[학과]</td>
+                  <td>$row[담당교수]</td>
+                  <td>$row[강의실]</td>
+                  <td>$row[강의시간]</td>
+                  <td>$row[분반]</td>
+                  <td>$row[경쟁률]</td>";?>
+                  <form action="/pick.php" method = "post">
+                  <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
+                  <td><button onclick="submit">과목 담기</button></td>
+                  </form>
+                  <? echo"
+                </tr>";
+
+                $count2++;
+              }
+              mysqli_close($conn);
+            ?>
+          </table>
+        </div>
+        <div id="elective_recommendation_ASC" style=display:none>
+          <table>
+            <tr>
+              <th>순위</th>
+              <th>교과목명</th>
+              <th>학년</th>
+              <th>학과</th>
+              <th>담당교수</th>
+              <th>강의실</th>
+              <th>강의시간</th>
+              <th>분반</th>
+              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>과목담기</th>
+            </tr>
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+              $query = "call competition_DESC('$dept_name')";
+              $result = mysqli_query($conn,$query);
+              $count2 = 1;
+              while($row = mysqli_fetch_array($result))
+              {
+                echo "
+                <tr>
+                  <td>$count2</td>
+                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
+                  <td>$row[학년]</td>
+                  <td>$row[학과]</td>
+                  <td>$row[담당교수]</td>
+                  <td>$row[강의실]</td>
+                  <td>$row[강의시간]</td>
+                  <td>$row[분반]</td>
+                  <td>$row[경쟁률]</td>";?>
+                  <form action="/pick.php" method = "post">
+                  <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
+                  <td><button onclick="submit">과목 담기</button></td>
+                  </form>
+                  <? echo"
+                </tr>";
+
+                $count2++;
+              }
+              mysqli_close($conn);
+            ?>
+          </table>
+        </div>
+        <div id="elective_recommendation_DESC" style=display:none>
+          <table>
+            <tr>
+              <th>순위</th>
+              <th>교과목명</th>
+              <th>학년</th>
+              <th>학과</th>
+              <th>담당교수</th>
+              <th>강의실</th>
+              <th>강의시간</th>
+              <th>분반</th>
+              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>과목담기</th>
+            </tr>
+            <?
+              include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+              $query = "call competition_DESC('$dept_name')";
+              $result = mysqli_query($conn,$query);
+              $count2 = 1;
+              while($row = mysqli_fetch_array($result))
+              {
+                echo "
+                <tr>
+                  <td>$count2</td>
+                  <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[교과목명]</a></td>
+                  <td>$row[학년]</td>
+                  <td>$row[학과]</td>
+                  <td>$row[담당교수]</td>
+                  <td>$row[강의실]</td>
+                  <td>$row[강의시간]</td>
+                  <td>$row[분반]</td>
+                  <td>$row[경쟁률]</td>";?>
+                  <form action="/pick.php" method = "post">
+                  <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
+                  <td><button onclick="submit">과목 담기</button></td>
+                  </form>
+                  <? echo"
+                </tr>";
+
+                $count2++;
+              }
+              mysqli_close($conn);
+            ?>
+          </table>
+        </div>
+        
+        
     </div>
 
     <script type="text/javascript">
+      var menu=1;
+      var _mode=3;
       function hideANDshow(mode)
       {
-        var x = document.getElementById("pick_sub");
-        var x2= document.getElementById("pick_sub2");
-        var y = document.getElementById("pick_prof");
-        var a = document.getElementById("pick_temp1");
-        var b = document.getElementById("pick_temp2");
-        var c = document.getElementById("pick_temp3");
+        if(mode <=2 )
+          menu = mode;
+
+        var mca = document.getElementById("major_competition_ASC");
+        var mcd = document.getElementById("major_competition_DESC");
+        var mra = document.getElementById("major_recommendation_ASC");
+        var mrd = document.getElementById("major_recommendation_DESC");
+        
+        var eca = document.getElementById("elective_competition_ASC");
+        var ecd = document.getElementById("elective_competition_DESC");
+        var era = document.getElementById("elective_recommendation_ASC");
+        var erd = document.getElementById("elective_recommendation_DESC");
+        
+
         var but = document.getElementById("rating");
 
-        if(mode === 1)
+        if(menu===1 && (mode === 1 || mode ===3))
         {
-          x.style.display="block";
-          x2.style.display="none";
-          y.style.display="none";
-          a.style.display="none";
-          b.style.display="none";
-          c.style.display="none";
+          mca.style.display="block";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="none";
+          
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="none";
+          
           but.innerHTML = "오름차순";
-
         }
-        else if(mode === 2)
+        else if(menu===1 && mode === 4)
         {
-          x.style.display="none";
-          x2.style.display="none";
-          y.style.display="block";
-          a.style.display="none";
-          b.style.display="none";
-          c.style.display="none";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="block";
+          mrd.style.display="none";
+          
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="none";
+          
+          but.innerHTML = "오름차순";
         }
-        else if(mode === 3)
+        else if(menu===2 && (mode === 2 || mode ===3))
         {
-          x.style.display="none";
-          x2.style.display="none";
-          y.style.display="none";
-          a.style.display="block";
-          b.style.display="none";
-          c.style.display="none";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="none";
+          
+          eca.style.display="block";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="none";
+          
+          but.innerHTML = "오름차순";
         }
-        else if(mode === 4)
+        else if(menu===2 && mode === 4)
         {
-          x.style.display="none";
-          x2.style.display="none";
-          y.style.display="none";
-          a.style.display="none";
-          b.style.display="block";
-          c.style.display="none";
-        }
-        else if(mode === 5)
-        {
-          x.style.display="none";
-          x2.style.display="none";
-          y.style.display="none";
-          a.style.display="none";
-          b.style.display="none";
-          c.style.display="block";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="none";
+          
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="block";
+          erd.style.display="none";
+          
+          but.innerHTML = "오름차순";
         }
       }
 
       function rating()
       {
-        var x = document.getElementById("rating");
-        var a = document.getElementById("pick_sub");
-        var b = document.getElementById("pick_sub2");
+        var but = document.getElementById("rating");
+
+        var mca = document.getElementById("major_competition_ASC");
+        var mcd = document.getElementById("major_competition_DESC");
+        var mra = document.getElementById("major_recommendation_ASC");
+        var mrd = document.getElementById("major_recommendation_DESC");
+        
+        var eca = document.getElementById("elective_competition_ASC");
+        var ecd = document.getElementById("elective_competition_DESC");
+        var era = document.getElementById("elective_recommendation_ASC");
+        var erd = document.getElementById("elective_recommendation_DESC");
 
 
-        if (x.innerHTML === "오름차순")
+        if (menu=== 1 && _mode===3 && but.innerHTML === "오름차순")
         {
-          x.innerHTML = "내림차순";
-          a.style.display="none";
-          b.style.display="block";
+          but.innerHTML = "내림차순";
+          mca.style.display="none";
+          mcd.style.display="block";
+          mra.style.display="none";
+          mrd.style.display="none";
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="none";
         }
-        else
+        else if(menu=== 1 && _mode===3 && but.innerHTML === "내림차순")
         {
-          x.innerHTML = "오름차순";
-          a.style.display="block";
-          b.style.display="none";
+          but.innerHTML = "오름차순";
+          mca.style.display="block";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="none";
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="none";
+        }
+        else if(menu=== 1 && _mode===4 && but.innerHTML === "오름차순")
+        {
+          but.innerHTML = "내림차순";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="block";
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="none";
+        }
+        else if(menu=== 1 && _mode===3 && but.innerHTML === "내림차순")
+        {
+          but.innerHTML = "오름차순";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="block";
+          mrd.style.display="none";
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="none";
+        }
+        else if(menu=== 2 && _mode===3 && but.innerHTML === "오름차순")
+        {
+          but.innerHTML = "내림차순";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="none";
+          eca.style.display="none";
+          ecd.style.display="block";
+          era.style.display="none";
+          erd.style.display="none";
+        }
+        else if(menu=== 2 && _mode===3 && but.innerHTML === "내림차순")
+        {
+          but.innerHTML = "오름차순";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="none";
+          eca.style.display="block";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="none";
+        }
+        else if(menu=== 2 && _mode===4 && but.innerHTML === "오름차순")
+        {
+          but.innerHTML = "내림차순";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="none";
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="none";
+          erd.style.display="block";
+        }
+        else if(menu=== 2 && _mode===4 && but.innerHTML === "내림차순")
+        {
+          but.innerHTML = "오름차순";
+          mca.style.display="none";
+          mcd.style.display="none";
+          mra.style.display="none";
+          mrd.style.display="none";
+          eca.style.display="none";
+          ecd.style.display="none";
+          era.style.display="block";
+          erd.style.display="none";
         }
       }
 
