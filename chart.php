@@ -71,7 +71,7 @@ if($_SESSION['id']!=null) {
                 <?
                   include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-                  $query = "call competition_ASC('$dept_name')";
+                  $query = "call major_competition_ASC('$dept_name','$user_grade')";
                   $result = mysqli_query($conn,$query);
                   $count = 1;
 
@@ -119,7 +119,7 @@ if($_SESSION['id']!=null) {
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "call competition_DESC('$dept_name')";
+              $query = "call major_competition_DESC('$dept_name','$user_grade')";
               $result = mysqli_query($conn,$query);
               $count2 = 1;
               while($row = mysqli_fetch_array($result))
@@ -159,13 +159,13 @@ if($_SESSION['id']!=null) {
               <th>강의실</th>
               <th>강의시간</th>
               <th>분반</th>
-              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>추천지수 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
               <th>과목담기</th>
             </tr>
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "call competition_DESC('$dept_name')";
+              $query = "call major_recommendation_ASC('$dept_name','$user_grade')";
               $result = mysqli_query($conn,$query);
               $count2 = 1;
               while($row = mysqli_fetch_array($result))
@@ -180,7 +180,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
                   <td>$row[분반]</td>
-                  <td>$row[경쟁률]</td>";?>
+                  <td>$row[추천지수]</td>";?>
                   <form action="/pick.php" method = "post">
                   <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
                   <td><button onclick="submit">과목 담기</button></td>
@@ -205,13 +205,13 @@ if($_SESSION['id']!=null) {
               <th>강의실</th>
               <th>강의시간</th>
               <th>분반</th>
-              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>추천지수 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
               <th>과목담기</th>
             </tr>
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "call competition_DESC('$dept_name')";
+              $query = "call major_recommendation_DESC('$dept_name','$user_grade')";
               $result = mysqli_query($conn,$query);
               $count2 = 1;
               while($row = mysqli_fetch_array($result))
@@ -226,7 +226,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
                   <td>$row[분반]</td>
-                  <td>$row[경쟁률]</td>";?>
+                  <td>$row[추천지수]</td>";?>
                   <form action="/pick.php" method = "post">
                   <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
                   <td><button onclick="submit">과목 담기</button></td>
@@ -240,7 +240,7 @@ if($_SESSION['id']!=null) {
             ?>
           </table>
         </div>
-        
+
         <div id="elective_competition_ASC" style=display:none>
             <table>
                 <tr>
@@ -258,7 +258,7 @@ if($_SESSION['id']!=null) {
                 <?
                   include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-                  $query = "call competition_ASC('$dept_name')";
+                  $query = "call elective_competition_ASC('$dept_name')";
                   $result = mysqli_query($conn,$query);
                   $count = 1;
 
@@ -306,7 +306,7 @@ if($_SESSION['id']!=null) {
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "call competition_DESC('$dept_name')";
+              $query = "call elective_competition_DESC('$dept_name')";
               $result = mysqli_query($conn,$query);
               $count2 = 1;
               while($row = mysqli_fetch_array($result))
@@ -346,13 +346,13 @@ if($_SESSION['id']!=null) {
               <th>강의실</th>
               <th>강의시간</th>
               <th>분반</th>
-              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>추천지수 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
               <th>과목담기</th>
             </tr>
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "call competition_DESC('$dept_name')";
+              $query = "call elective_recommendation_ASC('$dept_name')";
               $result = mysqli_query($conn,$query);
               $count2 = 1;
               while($row = mysqli_fetch_array($result))
@@ -367,7 +367,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
                   <td>$row[분반]</td>
-                  <td>$row[경쟁률]</td>";?>
+                  <td>$row[추천지수]</td>";?>
                   <form action="/pick.php" method = "post">
                   <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
                   <td><button onclick="submit">과목 담기</button></td>
@@ -392,13 +392,13 @@ if($_SESSION['id']!=null) {
               <th>강의실</th>
               <th>강의시간</th>
               <th>분반</th>
-              <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
+              <th>추천지수 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
               <th>과목담기</th>
             </tr>
             <?
               include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-              $query = "call competition_DESC('$dept_name')";
+              $query = "call elective_recommendation_DESC('$dept_name')";
               $result = mysqli_query($conn,$query);
               $count2 = 1;
               while($row = mysqli_fetch_array($result))
@@ -413,7 +413,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
                   <td>$row[분반]</td>
-                  <td>$row[경쟁률]</td>";?>
+                  <td>$row[추천지수]</td>";?>
                   <form action="/pick.php" method = "post">
                   <input type=hidden name="class_id"  value=<?php echo $row['class_id']?>>
                   <td><button onclick="submit">과목 담기</button></td>
@@ -427,8 +427,8 @@ if($_SESSION['id']!=null) {
             ?>
           </table>
         </div>
-        
-        
+
+
     </div>
 
     <script type="text/javascript">
@@ -438,17 +438,19 @@ if($_SESSION['id']!=null) {
       {
         if(mode <=2 )
           menu = mode;
+        else
+          _mode = mode;
 
         var mca = document.getElementById("major_competition_ASC");
         var mcd = document.getElementById("major_competition_DESC");
         var mra = document.getElementById("major_recommendation_ASC");
         var mrd = document.getElementById("major_recommendation_DESC");
-        
+
         var eca = document.getElementById("elective_competition_ASC");
         var ecd = document.getElementById("elective_competition_DESC");
         var era = document.getElementById("elective_recommendation_ASC");
         var erd = document.getElementById("elective_recommendation_DESC");
-        
+
 
         var but = document.getElementById("rating");
 
@@ -458,12 +460,12 @@ if($_SESSION['id']!=null) {
           mcd.style.display="none";
           mra.style.display="none";
           mrd.style.display="none";
-          
+
           eca.style.display="none";
           ecd.style.display="none";
           era.style.display="none";
           erd.style.display="none";
-          
+
           but.innerHTML = "오름차순";
         }
         else if(menu===1 && mode === 4)
@@ -472,12 +474,12 @@ if($_SESSION['id']!=null) {
           mcd.style.display="none";
           mra.style.display="block";
           mrd.style.display="none";
-          
+
           eca.style.display="none";
           ecd.style.display="none";
           era.style.display="none";
           erd.style.display="none";
-          
+
           but.innerHTML = "오름차순";
         }
         else if(menu===2 && (mode === 2 || mode ===3))
@@ -486,12 +488,12 @@ if($_SESSION['id']!=null) {
           mcd.style.display="none";
           mra.style.display="none";
           mrd.style.display="none";
-          
+
           eca.style.display="block";
           ecd.style.display="none";
           era.style.display="none";
           erd.style.display="none";
-          
+
           but.innerHTML = "오름차순";
         }
         else if(menu===2 && mode === 4)
@@ -500,12 +502,12 @@ if($_SESSION['id']!=null) {
           mcd.style.display="none";
           mra.style.display="none";
           mrd.style.display="none";
-          
+
           eca.style.display="none";
           ecd.style.display="none";
           era.style.display="block";
           erd.style.display="none";
-          
+
           but.innerHTML = "오름차순";
         }
       }
@@ -518,7 +520,7 @@ if($_SESSION['id']!=null) {
         var mcd = document.getElementById("major_competition_DESC");
         var mra = document.getElementById("major_recommendation_ASC");
         var mrd = document.getElementById("major_recommendation_DESC");
-        
+
         var eca = document.getElementById("elective_competition_ASC");
         var ecd = document.getElementById("elective_competition_DESC");
         var era = document.getElementById("elective_recommendation_ASC");
@@ -561,7 +563,7 @@ if($_SESSION['id']!=null) {
           era.style.display="none";
           erd.style.display="none";
         }
-        else if(menu=== 1 && _mode===3 && but.innerHTML === "내림차순")
+        else if(menu=== 1 && _mode===4 && but.innerHTML === "내림차순")
         {
           but.innerHTML = "오름차순";
           mca.style.display="none";
