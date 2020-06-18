@@ -56,6 +56,7 @@ if($_SESSION['id']!=null) {
   <body>
     <p>
       <table><h1>회원 정보</h1>
+          <!--<input type = "button"  value ="회원정보 수정" onClick= "location.href ='user_modification.php'">-->
         <tr>
           <th>아이디</th>
           <th>비밀번호</th>
@@ -69,6 +70,7 @@ if($_SESSION['id']!=null) {
           <td><? echo "$user_grade";?></td>
         </tr>
       </table>
+      <center><button onclick="" style ="margin-top:-20px;"><a href ="..\user_modification.php">회원정보 수정</a></button></center>
     </p>
     <p>
       <table><h1>내가 남긴 평점</h1>
@@ -161,6 +163,8 @@ if($_SESSION['id']!=null) {
         ?>
       </table>
     </p>
+    <center>
+    <input type = "button" value ="회원탈퇴" onClick= "location.href ='signout.php'"></center>
   </body>
 
 <?php
