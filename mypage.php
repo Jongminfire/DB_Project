@@ -77,6 +77,7 @@ if($_SESSION['id']!=null) {
           <th>교수님</th>
           <th>평점</th>
           <th>코멘트</th>
+          <th>남긴 후기 삭제</th>
         </tr>
         <tr>
           <?
@@ -92,7 +93,12 @@ if($_SESSION['id']!=null) {
                 <td><a href = 'analysis_lecture.php?id=$row[sub_id]'>$row[sub_name]</a></td>
                 <td>$row[prof_name]</td>
                 <td>$row[score]</td>
-                <td>$row[comment]</td>
+                <td>$row[comment]</td>";?>
+                <form action="/cancel_evaluation.php" method = "post">
+                  <input type=hidden name="subject_id"  value=<?php echo $row['sub_id']?>>
+                  <td><button onclick="submit">삭제</button></td>
+                </form>
+                <? echo"
               </tr>";
             }
             mysqli_close($conn);
