@@ -1,5 +1,6 @@
 <?php
 session_start();
+ini_set('display_errors', '0');   //오류 메세지 무시
 if($_SESSION['id']!=null) {
 ?>
 

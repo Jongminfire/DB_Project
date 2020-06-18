@@ -22,6 +22,6 @@
       <label>비밀번호: </label><input type = "password" name = "user_pwd"<br>
       </p>
       <input type = "button" value ="로그인" onClick= "checkform()">
-      <input type = "button" value ="회원가입" onClick= "location.href='signup.html'">
+      <input type = "button" value ="회원가입" onClick= "location.href='signup.php'">
     </form>
 </center>

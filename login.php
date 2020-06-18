@@ -1,5 +1,6 @@
 <?
   session_start();
+  ini_set('display_errors', '0');   //오류 메세지 무시
   include './dbconn.php'; //dpconn 내용 중복되지 않게
 
   $id = $_POST['user_id'];

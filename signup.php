@@ -1,29 +1,52 @@
-<?
-  include './dbconn.php'; //dpconn 내용 중복되지 않게
+<script>
+  function checkform(){
+    if (!document.signup_form.user_id.value){
+      alert('아이디를 입력하세요');
+      document.signup_form.user_id.focus();
+      return;
+    }
+    else if(!document.signup_form.user_pwd.value){
+      alert('패스워드를 입력하세요');
+      document.signup_form.user_password.focus();
+      return;
+    }
 
-  $id = $_POST['user_id'];
-  $pwd = $_POST['user_pwd'];
-  $grade = $_POST['user_grade'];
-  $dept = $_POST['dept_name'];
-
-  $query = "Select * from user where user_id = '$id'";
-  $result = mysqli_query($conn,$query);
-  $num = mysqli_num_rows($result);    //mysql_num_rows() 함수로 result 값이 몇개인지 알 수 있음
-
-  if(!$num){
-    $query2 = "INSERT INTO user(user_id, dept_name, user_pwd, user_grade) VALUES('$id','$dept','$pwd','$grade')";
-    mysqli_query($conn, $query2);
-    echo "<script>alert('회원가입 완료!'); location.href='./main1.php';</script>";
+    document.signup_form.submit();
   }
-  else {
-?>
+</script>
 
-  <script>
-    alert('해당 아이디가 존재함!');
-    location.href = './signup.html';
-  </script>
-<?
-  }
-?>
+<body>
+    <center>
+      <form name="signup_form" action = './signup_check.php' method = "post">
+      <p><h1> 회원가입 </h1></p>
+      <label>아이디: </label> <input type = "text" name = "user_id"><p>
+      <label>비밀번호: </label><input type = "password" name = "user_pwd"<p>
+      <p>학과:
+      <select name = "dept_name">
+      <?
+        include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-?>
+        $query = "select dept_name from department order by dept_name ASC;";
+        $result = mysqli_query($conn,$query);
+
+        while($row = mysqli_fetch_array($result))
+        {
+          echo "
+          <tr>
+            <option value = $row[dept_name]> $row[dept_name]
+          </tr>";
+        }
+      ?>
+      </select>
+      <p>학년:
+      <select name = "user_grade">
+      <option value = "1"> 1
+      <option value = "2"> 2
+      <option value = "3"> 3
+      <option value = "4"> 4
+      </select></p>
+      <input type = "button" value ="회원가입" onClick= "checkform()">
+      <input type = "button" value ="취소" onClick= "location.href='main1.php'">
+      </form>
+    </center>
+</body>
