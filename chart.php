@@ -64,6 +64,7 @@ if($_SESSION['id']!=null) {
                   <th>담당교수</th>
                   <th>강의실</th>
                   <th>강의시간</th>
+                  <th>학점</th>
                   <th>분반</th>
                   <th>경쟁률 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
                   <th>과목담기</th>
@@ -86,6 +87,7 @@ if($_SESSION['id']!=null) {
                       <td>$row[담당교수]</td>
                       <td>$row[강의실]</td>
                       <td>$row[강의시간]</td>
+                      <td>$row[학점]</td>
                       <td>$row[분반]</td>
                       <td>$row[경쟁률]</td>";?>
                       <form action="/pick.php" method = "post">
@@ -112,6 +114,7 @@ if($_SESSION['id']!=null) {
               <th>담당교수</th>
               <th>강의실</th>
               <th>강의시간</th>
+              <th>학점</th>
               <th>분반</th>
               <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
               <th>과목담기</th>
@@ -133,6 +136,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[담당교수]</td>
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
+                  <td>$row[학점]</td>
                   <td>$row[분반]</td>
                   <td>$row[경쟁률]</td>";?>
                   <form action="/pick.php" method = "post">
@@ -149,6 +153,22 @@ if($_SESSION['id']!=null) {
           </table>
         </div>
         <div id="major_recommendation_ASC" style=display:none>
+          <?
+            include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+            $query = "call major_recommendation_ASC('$dept_name','$user_grade')";
+            $result = mysqli_query($conn,$query);
+            $num = mysqli_num_rows($result);
+            $count2 = 1;
+
+            if(!$num)
+            {
+            echo "<br>평가 데이터가 없습니다.";
+            }
+
+
+            else {?>
+
           <table>
             <tr>
               <th>순위</th>
@@ -158,18 +178,15 @@ if($_SESSION['id']!=null) {
               <th>담당교수</th>
               <th>강의실</th>
               <th>강의시간</th>
+              <th>학점</th>
               <th>분반</th>
               <th>추천지수 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
               <th>과목담기</th>
             </tr>
-            <?
-              include './dbconn.php'; //dpconn 내용 중복되지 않게
-
-              $query = "call major_recommendation_ASC('$dept_name','$user_grade')";
-              $result = mysqli_query($conn,$query);
-              $count2 = 1;
+              <?
               while($row = mysqli_fetch_array($result))
               {
+
                 echo "
                 <tr>
                   <td>$count2</td>
@@ -179,6 +196,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[담당교수]</td>
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
+                  <td>$row[학점]</td>
                   <td>$row[분반]</td>
                   <td>$row[추천지수]</td>";?>
                   <form action="/pick.php" method = "post">
@@ -193,8 +211,25 @@ if($_SESSION['id']!=null) {
               mysqli_close($conn);
             ?>
           </table>
+            <?}?>
         </div>
+
+
         <div id="major_recommendation_DESC" style=display:none>
+          <?
+            include './dbconn.php'; //dpconn 내용 중복되지 않게
+
+            $query = "call major_recommendation_DESC('$dept_name','$user_grade')";
+            $result = mysqli_query($conn,$query);
+            $num = mysqli_num_rows($result);
+            $count2 = 1;
+
+            if(!$num)
+            {
+            echo "<br>평가 데이터가 없습니다.";
+            }
+            else{?>
+
           <table>
             <tr>
               <th>순위</th>
@@ -204,18 +239,15 @@ if($_SESSION['id']!=null) {
               <th>담당교수</th>
               <th>강의실</th>
               <th>강의시간</th>
+              <th>학점</th>
               <th>분반</th>
               <th>추천지수 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
               <th>과목담기</th>
             </tr>
             <?
-              include './dbconn.php'; //dpconn 내용 중복되지 않게
-
-              $query = "call major_recommendation_DESC('$dept_name','$user_grade')";
-              $result = mysqli_query($conn,$query);
-              $count2 = 1;
               while($row = mysqli_fetch_array($result))
               {
+
                 echo "
                 <tr>
                   <td>$count2</td>
@@ -225,6 +257,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[담당교수]</td>
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
+                  <td>$row[학점]</td>
                   <td>$row[분반]</td>
                   <td>$row[추천지수]</td>";?>
                   <form action="/pick.php" method = "post">
@@ -239,6 +272,7 @@ if($_SESSION['id']!=null) {
               mysqli_close($conn);
             ?>
           </table>
+          <?}?>
         </div>
 
         <div id="elective_competition_ASC" style=display:none>
@@ -251,6 +285,7 @@ if($_SESSION['id']!=null) {
                   <th>담당교수</th>
                   <th>강의실</th>
                   <th>강의시간</th>
+                  <th>학점</th>
                   <th>분반</th>
                   <th>경쟁률 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
                   <th>과목담기</th>
@@ -273,6 +308,7 @@ if($_SESSION['id']!=null) {
                       <td>$row[담당교수]</td>
                       <td>$row[강의실]</td>
                       <td>$row[강의시간]</td>
+                      <td>$row[학점]</td>
                       <td>$row[분반]</td>
                       <td>$row[경쟁률]</td>";?>
                       <form action="/pick.php" method = "post">
@@ -289,6 +325,7 @@ if($_SESSION['id']!=null) {
                 ?>
             </table>
         </div>
+
         <div id="elective_competition_DESC" style=display:none>
           <table>
             <tr>
@@ -299,6 +336,7 @@ if($_SESSION['id']!=null) {
               <th>담당교수</th>
               <th>강의실</th>
               <th>강의시간</th>
+              <th>학점</th>
               <th>분반</th>
               <th>경쟁률 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
               <th>과목담기</th>
@@ -320,6 +358,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[담당교수]</td>
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
+                  <td>$row[학점]</td>
                   <td>$row[분반]</td>
                   <td>$row[경쟁률]</td>";?>
                   <form action="/pick.php" method = "post">
@@ -335,7 +374,23 @@ if($_SESSION['id']!=null) {
             ?>
           </table>
         </div>
+
         <div id="elective_recommendation_ASC" style=display:none>
+          <?
+            include './dbconn.php';
+
+            $query = "call elective_recommendation_ASC('$dept_name')";
+            $result = mysqli_query($conn,$query);
+            $count2 = 1;
+            $num = mysqli_num_rows($result);
+
+
+            if(!$num)
+            {
+            echo "<br>평가 데이터가 없습니다.";
+            }
+            else{?>
+
           <table>
             <tr>
               <th>순위</th>
@@ -345,18 +400,15 @@ if($_SESSION['id']!=null) {
               <th>담당교수</th>
               <th>강의실</th>
               <th>강의시간</th>
+              <th>학점</th>
               <th>분반</th>
               <th>추천지수 <button onclick="rating()"><span id="rating">오름차순</span></button></th>
               <th>과목담기</th>
             </tr>
             <?
-              include './dbconn.php'; //dpconn 내용 중복되지 않게
-
-              $query = "call elective_recommendation_ASC('$dept_name')";
-              $result = mysqli_query($conn,$query);
-              $count2 = 1;
               while($row = mysqli_fetch_array($result))
               {
+
                 echo "
                 <tr>
                   <td>$count2</td>
@@ -366,6 +418,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[담당교수]</td>
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
+                  <td>$row[학점]</td>
                   <td>$row[분반]</td>
                   <td>$row[추천지수]</td>";?>
                   <form action="/pick.php" method = "post">
@@ -380,8 +433,24 @@ if($_SESSION['id']!=null) {
               mysqli_close($conn);
             ?>
           </table>
+          <?}?>
         </div>
+
+
         <div id="elective_recommendation_DESC" style=display:none>
+          <?
+            include './dbconn.php';
+
+            $query = "call elective_recommendation_DESC('$dept_name')";
+            $result = mysqli_query($conn,$query);
+            $count2 = 1;
+            $num = mysqli_num_rows($result);
+            if(!$num)
+            {
+            echo "<br>평가 데이터가 없습니다.";
+            }
+            else{?>
+
           <table>
             <tr>
               <th>순위</th>
@@ -391,18 +460,15 @@ if($_SESSION['id']!=null) {
               <th>담당교수</th>
               <th>강의실</th>
               <th>강의시간</th>
+              <th>학점</th>
               <th>분반</th>
               <th>추천지수 <button onclick="rating()"><span id="rating">내림차순</span></button></th>
               <th>과목담기</th>
             </tr>
-            <?
-              include './dbconn.php'; //dpconn 내용 중복되지 않게
-
-              $query = "call elective_recommendation_DESC('$dept_name')";
-              $result = mysqli_query($conn,$query);
-              $count2 = 1;
+              <?
               while($row = mysqli_fetch_array($result))
               {
+
                 echo "
                 <tr>
                   <td>$count2</td>
@@ -412,6 +478,7 @@ if($_SESSION['id']!=null) {
                   <td>$row[담당교수]</td>
                   <td>$row[강의실]</td>
                   <td>$row[강의시간]</td>
+                  <td>$row[학점]</td>
                   <td>$row[분반]</td>
                   <td>$row[추천지수]</td>";?>
                   <form action="/pick.php" method = "post">
@@ -426,6 +493,7 @@ if($_SESSION['id']!=null) {
               mysqli_close($conn);
             ?>
           </table>
+          <?}?>
         </div>
 
 
@@ -437,7 +505,10 @@ if($_SESSION['id']!=null) {
       function hideANDshow(mode)
       {
         if(mode <=2 )
+        {
           menu = mode;
+          _mode = 3;
+        }
         else
           _mode = mode;
 

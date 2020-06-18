@@ -3,7 +3,7 @@
 
   $sub_id = $_GET['id'];
 
-  $query ="select sub_id,dept_name,subject.prof_id,sub_name,sub_grade,prof_name from subject inner join professor on professor.prof_id=subject.prof_id where sub_id = '$sub_id'";
+  $query ="select sub_id,sub_credit,dept_name,subject.prof_id,sub_name,sub_grade,prof_name from subject inner join professor on professor.prof_id=subject.prof_id where sub_id = '$sub_id'";
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_array($result);
 
@@ -12,13 +12,18 @@
   $prof_id=$row['prof_id'];
   $sub_grade=$row['sub_grade'];
   $prof_name=$row['prof_name'];
+  $sub_credit=$row['sub_credit'];
 
   $query3 = "select sum(score)/count(*) as '평균평점' from evaluation where sub_id='$sub_id'";
   $result3 = mysqli_query($conn, $query3);
   $row3 = mysqli_fetch_array($result3);
 
   $score = $row3['평균평점'];
-
+  if($score==NULL)
+  {
+    $score=0;
+  }
+  
   session_start();
   ini_set('display_errors', '0');   //오류 메세지 무시
   if($_SESSION['id']!=null) {
@@ -69,7 +74,7 @@
     <div>
         <div style="font-size:50px;"><? echo"$sub_name","   "?> &nbsp &nbsp; <span style="font-size:35px;"><? echo"$prof_name","   "?>  </span></div>
         <br>
-    <label style="font-size:20px;"><? echo "&nbsp;&nbsp;&nbsp;&nbsp;<","$dept_name","  ","$sub_grade","학년>"," ","평균평점:","$score";?></label>
+    <label style="font-size:20px;"><? echo "&nbsp;&nbsp;&nbsp;&nbsp;<","$dept_name","  ","$sub_grade","학년>"," ","평균평점:","$score"," ","$sub_credit","학점";?></label>
     <br><br><br>
     <div style = "border: solid 1px; width: 33%; padding: 20px;">
       <form action="/evaluate.php" method = "post">

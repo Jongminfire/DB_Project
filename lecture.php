@@ -74,6 +74,7 @@ if($_SESSION['id']!=null) {
           <table>
             <tr>
               <th>강의명</th>
+              <th>학점</th>
               <th>교수명</th>
               <th>학과</th>
               <th>학년</th>
@@ -90,6 +91,7 @@ if($_SESSION['id']!=null) {
                 echo "
                 <tr>
                   <td><a href = 'analysis_lecture.php?id=$row[sub_id]'> $row[sub_name]</a></td>
+                  <td>$row[sub_credit]</td>
                   <td>$row[prof_name]</td>
                   <td>$row[dept_name]</td>
                   <td>$row[sub_grade]</td>
