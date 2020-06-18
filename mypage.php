@@ -117,6 +117,7 @@ if($_SESSION['id']!=null) {
           <th>학과</th>
           <th>학년</th>
           <th>분반</th>
+          <th>학점</th>
           <th>평점</th>
           <th>경쟁률</th>
           <th>담기 취소</th>
@@ -124,20 +125,15 @@ if($_SESSION['id']!=null) {
         <?
           include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-          $query2 = "Select class.class_id,class_no,sub_credit,subject.sub_id,sub_name,prof_name,dept_name,sub_grade,class_pick/class_size as '경쟁률' from user_subject inner join class inner join subject inner join professor on professor.prof_id = subject.prof_id on class.sub_id = subject.sub_id on class.class_id = user_subject.class_id where user_id='$user_id' order by 경쟁률 ASC";
+          $query2 = "Select class.class_id,class_no,sub_credit,subject.sub_id,sub_name,prof_name,dept_name,sub_grade,round(class_pick/class_size,2) as '경쟁률' from user_subject inner join class inner join subject inner join professor on professor.prof_id = subject.prof_id on class.sub_id = subject.sub_id on class.class_id = user_subject.class_id where user_id='$user_id' order by 경쟁률 ASC";
           $result2 = mysqli_query($conn,$query2);
           $count =1;
 
           while($row2 = mysqli_fetch_array($result2))
           {
-            $query3 = "select sum(score)/count(*) as '평균평점' from evaluation where sub_id= $row2[sub_id]";
+            $query3 = "select round(sum(score)/count(*),2) as '평균평점' from evaluation where sub_id= $row2[sub_id]";
             $result3 = mysqli_query($conn, $query3);
             $row3 = mysqli_fetch_array($result3);
-
-            if($row3[평균평점]==NULL)
-            {
-              $row3[평균평점]=0;
-            }
 
             echo "
             <tr>
