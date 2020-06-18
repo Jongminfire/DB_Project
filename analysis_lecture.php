@@ -52,7 +52,7 @@
 
         ul
         {
-            background-color: #AAAAFF;
+            background-color: #bd1c11;
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -68,7 +68,7 @@
 
   <body>
 
-    <h2><a href ="../main2.php" style="text-decoration:none">세종GG</a></h2>
+  <h2><a href ="../main2.php" style="text-decoration:none; color:#bd1c11; font-weight:bold;">SEJONG.GG</a></h2>
     <br><br>
     <center>
     <div>

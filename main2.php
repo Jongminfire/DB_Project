@@ -6,7 +6,7 @@ if($_SESSION['id']!=null) {
 
 <body>
     <center>
-      <span style="font-size:100px; color:#bd1c11; font-family:Lucida Console; font-weight:bold;">SEJONG.GG</span><br><br><br><br>
+      <span style="font-size:100px; color:#bd1c11; font-weight:bold;">SEJONG.GG</span><br><br><br><br>
       <p>  <? echo $_SESSION['id'] ?>님 안녕하세요!
       <input type = "button" value ="로그아웃" onClick= "location.href ='logout.php'">
       </p>
