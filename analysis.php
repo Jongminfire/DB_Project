@@ -83,7 +83,7 @@ if($_SESSION['id']!=null) {
 
               while($row2 = mysqli_fetch_array($result2))
               {
-
+                $row2[평균평점]=round($row2[평균평점],2);
                 echo "
                 <tr>
                   <td>$count</td>
@@ -130,6 +130,8 @@ if($_SESSION['id']!=null) {
 <?
               while($row = mysqli_fetch_array($result))
               {
+                $row[평점]=round($row[평점],2);
+
                 echo "
                 <tr>
                   <td>$count</td>
