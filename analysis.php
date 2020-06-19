@@ -53,7 +53,12 @@ if($_SESSION['id']!=null) {
         <?
           include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-          $query2 = "select subject.sub_id,sub_credit,sub_name,prof_name,dept_name,sum(score)/count(score) as '평균평점' from evaluation inner join subject inner join professor on professor.prof_id = subject.prof_id on subject.sub_id = evaluation.sub_id group by evaluation.sub_id order by 평균평점 DESC";
+          $query2 = "select subject.sub_id,sub_credit,sub_name,prof_name,dept_name,sum(score)/count(score) as '평균평점' 
+          from evaluation inner join subject 
+          inner join professor 
+          on professor.prof_id = subject.prof_id 
+          on subject.sub_id = evaluation.sub_id 
+          group by evaluation.sub_id order by 평균평점 DESC";
           $result2 = mysqli_query($conn,$query2);
           $num = mysqli_num_rows($result2);
           $count =1;

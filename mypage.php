@@ -84,8 +84,17 @@ if($_SESSION['id']!=null) {
         <tr>
           <?
             include './dbconn.php'; //dpconn 내용 중복되지 않게
-
-            $query = "Select sub_name,subject.sub_id,prof_name,score,comment from evaluation inner join subject inner join professor on subject.prof_id = professor.prof_id on evaluation.sub_id = subject.sub_id where evaluation.user_id = '$user_id';";
+            
+            // evaluation테이블에서 user가 남긴 후기를 로그인 되어 있는 user_id와 evaluation테이블의 user_id를 비교해서 찾은 후에
+            // evaluation테이블에는 sub_id, prof_id로 저장되어있기 때문에 그 id값에 해당한는 name들은 각 subject테이블과 professor테이블을
+            // inner join을 통해서 가지고온다.
+            $query = "Select sub_name,subject.sub_id,prof_name,score,comment 
+            from evaluation 
+            inner join subject 
+            inner join professor 
+            on subject.prof_id = professor.prof_id 
+            on evaluation.sub_id = subject.sub_id 
+            where evaluation.user_id = '$user_id';";
             $result = mysqli_query($conn,$query);
 
             while($row = mysqli_fetch_array($result))
@@ -97,7 +106,8 @@ if($_SESSION['id']!=null) {
                 <td>$row[score]</td>
                 <td>$row[comment]</td>";?>
                 <form action="/cancel_evaluation.php" method = "post">
-                  <input type=hidden name="subject_id"  value=<?php echo $row['sub_id']?>>
+                  <!--cancel_evaluation.php로 해당하는 테이블의 row의 sub_id를 넘긴다.-->
+                  <input type=hidden name="subject_id"  value=<?php echo $row['sub_id']?>> 
                   <td><button onclick="submit">삭제</button></td>
                 </form>
                 <? echo"

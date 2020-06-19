@@ -72,7 +72,9 @@ if($_SESSION['id']!=null) {
                 <?
                   include './dbconn.php'; //dpconn 내용 중복되지 않게
 
-                  $query = "call major_competition_ASC('$dept_name','$user_grade')";
+                  // user의 학과(dept_name)과 학년(user_grade)를 프로시저의 parameter로 넘겨 user의 학과가 속한 단과대의 과목들과 user의 학년보다
+                  // 낮거나 같은 과목들을 프로시저를 통해 접근한다. 
+                  $query = "call major_competition_ASC('$dept_name','$user_grade')";  
                   $result = mysqli_query($conn,$query);
                   $count = 1;
 
